@@ -1,0 +1,12 @@
+[27-Apr-2017 04:39:52 CST6CDT] PHP Fatal error:  Uncaught exception 'Exception' with message 'The Froala Editor SDK library requires the imagick extension.' in /home/sgcoth/public_html/froala_php_sdk/lib/FroalaEditor.php:18
+Stack trace:
+#0 /home/sgcoth/public_html/froala_php_sdk/lib/FroalaEditor.php(23): requireDependencies()
+#1 /home/sgcoth/public_html/load_images.php(6): require('/home/sgcoth/pu...')
+#2 {main}
+  thrown in /home/sgcoth/public_html/froala_php_sdk/lib/FroalaEditor.php on line 18
+[27-Apr-2017 04:40:45 CST6CDT] PHP Fatal error:  Uncaught exception 'Exception' with message 'The Froala Editor SDK library requires the imagick extension.' in /home/sgcoth/public_html/froala_php_sdk/lib/FroalaEditor.php:18
+Stack trace:
+#0 /home/sgcoth/public_html/froala_php_sdk/lib/FroalaEditor.php(23): requireDependencies()
+#1 /home/sgcoth/public_html/load_images.php(6): require('/home/sgcoth/pu...')
+#2 {main}
+  thrown in /home/sgcoth/public_html/froala_php_sdk/lib/FroalaEditor.php on line 18
