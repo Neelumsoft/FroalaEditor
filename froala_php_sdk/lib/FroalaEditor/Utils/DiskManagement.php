@@ -109,10 +109,12 @@ class DiskManagement {
 		rmdir($dirPath);
 	}
 	
-	public static function deleteSelected($dirPath) {
+	public static function deleteSelected() {
 		foreach($_POST['data'] as $k=>$v){
 			if($v['type']=='folder'){
-				self::deleteDir($dirPath.$v['file']);
+				self::deleteDir($_SERVER['DOCUMENT_ROOT'].$v['src']);
+			}else{
+				self::delete($v['src']);
 			}
 		}
 	}

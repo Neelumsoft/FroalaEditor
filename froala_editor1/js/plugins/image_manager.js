@@ -60,7 +60,7 @@
 
 
             g()
-			window.B = B,window.C=C,window.ActiveTab='local',window.newCreatedFolders=[];
+			window.B = B,window.C=C,window.ActiveTab='local',window.checkActive=false,window.newCreatedFolders=[];
 			$(document).on('ImageManager.OpenFacebookImages',function(){
 				$(document).trigger('ImageManager.activateTab',['local']);
 				$('i.fr-tb-item').removeClass('active'),$('#fr-modal-local-images-btn').addClass('active');
@@ -261,7 +261,7 @@
 			if(b.opts.imageManagerFolders.length>0){
 			b.opts.imageManagerDeleteURL = b.opts.imageManagerDefaultDeleteURL+b.opts.imageManagerFolders.join('/')+'/';
 			}
-			//for(i=0;i<window.pg_a.length;i++){if(window.pg_a[i].name==a(c.currentTarget).siblings("img").attr('data-name')){window.pg_a.splice(i, 1);break;}}
+			
 			dataToSend = {deleteSelected:true,data:dc};
             var e = b.language.translate("Are you sure? Selected items will be deleted.");
             confirm(e) && (b.opts.imageManagerDeleteURL ? b.events.trigger("imageManager.beforeDeleteImage", [d]) !== !1 && ($('.fr-image-list .fr-image-container.fr-fb-selected').addClass("fr-image-deleting"),
@@ -277,9 +277,15 @@
             }).done(function(a) {
                 b.events.trigger("imageManager.imageDeleted", [a]);
                 //var c = l(parseInt(d.parent().attr("class").match(/fr-image-(\d+)/)[1], 10) + 1);
-                $('.fr-image-list .fr-image-container.fr-fb-selected').remove(),
-                //m(c),
-                n(!0)
+				//m(c),
+				vs=[];
+                $('.fr-image-list .fr-image-container.fr-fb-selected').each(function(index, element) {
+                    vs.push($(element).find('img').attr('src'));
+					$(element).remove();
+                });
+				for(i=0;i<window.pg_a.length;i++){if(vs.indexOf(window.pg_a[i].url) != -1){window.pg_a.splice(i, 1);}}
+				
+                n(!0);
             }).fail(function() {
                 var a = this.xhr();
                 r(Q, a.response || a.responseText)
@@ -651,6 +657,8 @@
 				window.stst=1;
 				openFacebookAlbum(a(c.currentTarget).attr('data-url'));
 			}else if(a(c.currentTarget).attr('data-subtype')=='fb-image'){
+				fbClickHandle(a(c.currentTarget).closest('.fr-image-container'));
+			}else if(window.checkActive==true){
 				fbClickHandle(a(c.currentTarget).closest('.fr-image-container'));
 			}else{
 				b.opts.imageManagerFolders.push(a(c.currentTarget).attr('data-name'));b.opts.imageManagerLoadURL=b.opts.imageManagerDefaultURL+b.opts.imageManagerFolders.join('/')+'/';
@@ -1062,9 +1070,12 @@ $(document).ready(function(e) {
 	$(document).on('click',"#fr-check-all-btn",function(){
 		//if(window.ActiveTab=='local') return false;
 		if($(this).hasClass('fa-circle')){
+			window.checkActive=true;
 			if(window.ActiveTab!='local'){
 				$('.fr-image-list .fr-image-container[data-type=image]').addClass('fr-fb-selected');
 			}else{
+				$('.fr-image-list .fr-image-container[data-type] .fr-insert-img');
+				$('.fr-open-folder');
 				$('.fr-image-list .fr-image-container[data-type]').addClass('fr-fb-selected');
 			}
 			
@@ -1072,6 +1083,7 @@ $(document).ready(function(e) {
 			$(this).addClass('fa-check-circle').removeClass('fa-circle');
 			
 		}else{
+			window.checkActive=false;
 			if(window.ActiveTab!='local'){
 				$('.fr-image-list .fr-image-container[data-type=image]').removeClass('fr-fb-selected');
 				$('#fb-import-btn').hide();

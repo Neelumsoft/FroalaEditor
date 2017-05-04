@@ -68,7 +68,7 @@ class Image {
   */
   public static function deleteSelected() {
     // Delete image.
-    return DiskManagement::deleteSelected($_SERVER['DOCUMENT_ROOT'].$src);
+    return DiskManagement::deleteSelected();
   }
   
   /**
