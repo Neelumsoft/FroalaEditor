@@ -119,6 +119,17 @@ class DiskManagement {
 		}
 	}
 	
+	public static function deleteAllFiles($folder) {
+		$files = glob($_SERVER['DOCUMENT_ROOT'].$folder . '*', GLOB_MARK);
+		foreach ($files as $file) {
+			if (is_dir($file)) {
+				self::deleteDir($file);
+			} else {
+				unlink($file);
+			}
+		}
+	}
+	
 	/**
 	* Create New Folder.
 	*

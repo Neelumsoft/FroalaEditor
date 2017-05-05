@@ -63,12 +63,21 @@ class Image {
   /**
   * Delete Selected Files from disk.
   *
-  * @param path string
   * @return boolean
   */
   public static function deleteSelected() {
     // Delete image.
     return DiskManagement::deleteSelected();
+  }
+  
+  /**
+  * Delete All Files from disk.
+  *
+  * @return boolean
+  */
+  public static function deleteAllFiles($folder) {
+    // Delete image.
+    return DiskManagement::deleteAllFiles($folder);
   }
   
   /**

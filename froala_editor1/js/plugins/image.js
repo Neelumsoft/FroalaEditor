@@ -342,12 +342,14 @@
                     if ("undefined" != typeof d)
                         for (g in d)
                             d.hasOwnProperty(g) && "link" != g && c.attr("data-" + g, d[g]);
-                    c.on("load", x),
+                    
+					c.on("load", x),
                     c.attr("src", a),
                     b.edit.on(),
                     j(),
                     b.undo.saveStep(),
-                    b.$el.blur(),
+                    b.$el.blur();
+					
                     b.events.trigger(h ? "image.replaced" : "image.inserted", [c, f])
                 } else
                     c = E(a, d, x),
@@ -393,7 +395,9 @@
               , d = this.response
               , e = this.responseXML
               , f = this.responseText;
+			  
             try {
+				
                 if (b.opts.imageUploadToS3)
                     if (201 == c) {
                         var g = A(e);
@@ -419,6 +423,8 @@
             }
         }
         function E(c, d, e) {
+			//alert('sfs');
+			//return false;
             var f, g = "";
             if (d && "undefined" != typeof d)
                 for (f in d)
@@ -446,27 +452,37 @@
             s(!0)
         }
         function G(c, d, e, f) {
+			//alert('in G()');
             function g() {
-                var e = a(this);
-                e.off("load"),
-                e.addClass("fr-uploading"),
-                e.next().is("br") && e.next().remove(),
-                b.placeholder.refresh(),
-                e.is(f) || w(e),
-                k(),
-                r(),
-                b.edit.off(),
+				//alert('in g of G()');
+				if(typeof window.noShowIMG == 'undefined' && !window.noShowIMG){
+					var e = a(this);
+					e.off("load"),
+					e.addClass("fr-uploading"),
+					e.next().is("br") && e.next().remove(),
+					b.placeholder.refresh(),
+					e.is(f) || w(e),
+					k(),
+					r(),
+					b.edit.off();
+				}
                 c.onload = function() {
-                    B.call(c, e)
+					//alert('c.loaded');
+					if(typeof window.noShowIMG != 'undefined' && window.noShowIMG){
+						//alert('image.inserted');
+						b.events.trigger("image.inserted", [c, f]);
+					}else{B.call(c, e); }
                 }
                 ,
                 c.onerror = C,
                 c.upload.onprogress = D,
-                c.onabort = F,
+                c.onabort = F;
+				if(typeof window.noShowIMG == 'undefined' && !window.noShowIMG){
                 e.off("abortUpload").on("abortUpload", function() {
                     4 != c.readyState && c.abort()
-                }),
-                c.send(d)
+                });
+				}
+                c.send(d);
             }
             var h, i = new FileReader;
             i.addEventListener("load", function() {
@@ -478,17 +494,22 @@
                         type: "image/jpeg"
                     }))
                 }
-                f ? (f.on("load", g),
-                b.edit.on(),
+				if(typeof window.noShowIMG != 'undefined' && window.noShowIMG){g(); return false;}
+                if(f){
+					f.on("load", g);
+					b.edit.on(),
                 b.undo.saveStep(),
                 f.data("fr-old-src", f.attr("src")),
-                f.attr("src", a)) : h = E(a, null, g)
+                f.attr("src", a)
+				}else{
+					h = E(a, null, g);
+				}
             }, !1),
             i.readAsDataURL(e)
         }
         function H(a, c) {
 			//updating file upload path;
-			if('undefined' != typeof(window.currentLocation) && window.currentLocation.length > 0){
+			if('undefined' != typeof window.currentLocation && window.currentLocation.length > 0){
 				b.opts.imageUploadURL = b.opts.imageManagerDefaultUploadURL+window.currentLocation.join('/')+'/';
 			}
             if ("undefined" != typeof a && a.length > 0) {

@@ -6,7 +6,11 @@ require 'froala_php_sdk/lib/FroalaEditor.php';
 // Delete the image.
 
 try {
-	if(isset($_POST['deleteSelected']) && $_POST['deleteSelected'] == true && isset($_POST['data']) && count($_POST['data'])){
+	
+	if(isset($_POST['deleteAll']) && isset($_GET['folder']) && $_POST['deleteAll'] == true  && strlen($_GET['folder']) > 0){
+		FroalaEditor_Image::deleteAllFiles($_GET['folder']);
+		$response = array('status'=>'success','message'=>'Files & Folders Deleted Successfully');
+	}elseif(isset($_POST['deleteSelected']) && $_POST['deleteSelected'] == true && isset($_POST['data']) && count($_POST['data']) > 0){
 		if(count($_POST['data'])>0){
 			FroalaEditor_Image::deleteSelected();
 			$response = array('status'=>'success','message'=>'Deleted successfully');
