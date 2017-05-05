@@ -282,6 +282,7 @@
                 headers: b.opts.requestHeaders
             }).done(function(a) {
                 b.events.trigger("imageManager.imageDeleted", [a]);
+				//$(document).trigger('imageManager.unCheckAll',[$('#fr-check-all-btn')]);
                 //var c = l(parseInt(d.parent().attr("class").match(/fr-image-(\d+)/)[1], 10) + 1);
 				//m(c),
 				g();
