@@ -187,7 +187,9 @@ die;*/
           }
         }
       }
+	  if(!isset($_GET['mm'])){
 	  foreach($folders as $a){array_push($response,$a);}
+	  }
 	  foreach($images as $a){array_push($response,$a);}
     }
 

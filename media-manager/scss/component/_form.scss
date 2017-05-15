@@ -1,0 +1,709 @@
+
+* {
+	outline: none;
+}
+.form-inline {
+	.input-group {
+		display: inline-table;
+    	vertical-align: middle;
+	}
+	.input-group-addon, .form-control {
+		width:auto;
+		display:table-cell;
+	}
+	.input-group-addon {
+		vertical-align:middle;
+	}
+}
+input[type="text"],input[type="email"],input[type="password"],
+input[type="tel"],input[type="number"], input[type="search"] , textarea, select {
+	border:1px solid $grey2; background:$gold-yellow ;
+	padding:2px 10px; height:30px; max-width: 100%; color: $grey;
+}
+input[type="text"]:focus,input[type="email"]:focus,input[type="password"]:focus,
+input[type="tel"]:focus ,input[type="number"]:focus, input[type="search"]:focus, textarea:focus, select:focus {
+	border-color: $black;
+} 
+textarea {
+	padding:5px 10px; height:120px; resize:none; font-family: $font-cloud-l;
+}
+::-webkit-input-placeholder { 
+  color: $skyblue; font-family: $font-cloud-l; opacity: 1;
+}
+::-moz-placeholder {
+  color: $skyblue; font-family: $font-cloud-l; opacity: 1;
+}
+:-ms-input-placeholder { 
+  color: $skyblue; font-family: $font-cloud-l; opacity: 1;
+}
+:-moz-placeholder { 
+  color: $skyblue; font-family: $font-cloud-l; opacity: 1;
+}
+.error {
+	color: $red; border-color: $red !important; 
+	input {
+		color: $red; border-color: $red !important; 
+	}
+}
+.error-msg {
+	color: $red; font-size: 13px; line-height: 1; margin:0; padding-top: 3px;
+	width: 100%;
+}
+.form-row {
+	display: block;
+	&::after{
+		clear:both; content: "";  width: 100%; 
+		display: block; visibility: hidden; height: 0;
+	}
+}
+
+/**  Button  **/
+
+.btn {
+	background:$white; color:$skyblue; border:1px solid $skyblue;
+	&:hover {
+		background:$grey4;
+	}
+	&:focus, &:active {
+		background:$grey5;
+	}
+}
+.btn-grey {
+	background:$grey2; border:1px solid $grey2; color:$grey;
+	&:hover {
+		background:$grey; color: $white;
+	}
+	&:focus,&:active {
+		background:$grey; color:$white;
+	}
+}
+.btn-skyblue {
+	background:$skyblue; border:1px solid $grey2; color:$white;
+	&:hover {
+		background:$skyblue2; color: $white;
+	}
+	&:focus,&:active {
+		background:$skyblue3; color:$white;
+	}
+}
+.btn-blue {
+	background:$blue2; border:1px solid $grey2; color:$white;
+	&:hover {
+		background:$blue;  color:$white;
+	}
+	&:focus,&:active {
+		background:$blue-dark; color:$white;
+	}
+}
+.btn-light-blue {
+	background:$blue-light; border:1px solid $grey2; color:$white;
+	&:hover {
+		background:$blue;
+	}
+	&:focus,&:active {
+		background:$blue-dark; color:$white;
+	}
+}
+.btn-cyan {
+	background:$cyan; border:1px solid $grey2; color:$white;
+	&:hover {
+		background:$cyan2; color:$white  !important;
+	}
+	&:focus,&:active {
+		background:$cyan2; border-color:$grey2; color:$white;
+	}
+}
+.btn-red {
+	background:$red-light; border:1px solid $grey2; color:$white;
+	&:hover {
+		background:$red2;
+	}
+	&:focus,&:active {
+		background:$red-dark; color:$white;
+	}
+}
+.btn-green {
+	background:$green3; border:1px solid $grey2; color:$white;
+	&:hover {
+		background:$green; color:$white;
+	}
+	&:focus,&:active {
+		background:$green; color:$white;
+	}
+}
+.btn-black {
+	background:$black2; border:1px solid $black2; color:$white;
+	&:hover {
+		background:$black-light; color:$white  !important;
+	}
+	&:focus,&:active {
+		background:$black2; border-color:$black2; color:$white;
+	}
+}
+.btn-back {
+	position: relative; background:$white; border:1px solid $grey2; color:$grey;
+	min-width: 85px;
+	&:hover {
+		background:$skyblue; color:$white; border-color:$skyblue;
+	}
+	&:hover:after {
+		border-right-color:$skyblue;	
+	}
+	&:focus,&:active {
+		background:$skyblue; border-color:$skyblue; color:$white;
+	}
+	&:before {
+		content: ""; display: inline-block;
+		left: -12px; position: absolute;
+		top: -1px;		width: 0; 		height: 0; 
+		border-top: 15px solid transparent;
+		border-bottom: 15px solid transparent;   
+		border-right:12px solid $grey2; 
+	}
+	&:after {
+		content: ""; display: inline-block;
+		left: -11px; position: absolute;
+		top: -1px;		width: 0; 		height: 0; 
+		border-top: 15px solid transparent;
+		border-bottom: 15px solid transparent;   
+		border-right:12px solid $white; 
+	}
+}
+.btn-sm {
+	height:22px; line-height:10px; 
+}
+.btn-md {
+	height:30px; line-height:20px; font-size: $font-20; font-family: $font-cloud-l; 
+}
+.btn-lg {
+	height:40px; line-height:30px;  font-size: $font-20; font-family: $font-cloud-l; 
+}
+.btn-sm, .btn-md , .btn-lg {
+	transition:all 0.4s ease-in-out; -webkit-transition:all 0.4s ease-in-out;
+	padding:5px 10px; vertical-align: top; text-align: center;
+	&:focus{
+		outline:none;
+	}
+}
+a.btn-sm , .btn-md, a.btn-lg {
+	display: inline-block;
+}
+.content {
+	button {
+		font-family: $font-cloud-l; 
+	}
+	.btn-md, .btn-lg {
+		padding:5px 10px;
+	}
+	select {
+		color: $skyblue;
+	}
+	strong {
+		font-weight: normal; font-family: $font-cloud-b; 
+	}
+}
+
+/**  Checkbox and selectbox  **/
+
+.checkbox {
+	opacity: 0; position: absolute;
+	&+label::before {
+		border:2px solid $grey2; display: inline-block; width: 18px; height: 18px;
+		content:""; margin:0px 10px 0 0; float: left; cursor: pointer; @include border-radius(2px);
+	}
+}
+.checkbox {
+	&:checked+label::after {
+		content: "\e94a"; font-family: "spinshopping_gen" !important;
+		color: $skyblue; position: absolute; left: 2px; top: -3px;
+		font-size: 16px;
+	}
+}
+.checkbox-btn {
+	display: inline-block;
+	label {
+		display: block;
+	}
+}
+.checkbox-label {
+	position: relative; cursor: pointer;
+	h3 {
+		display: inline-block;
+	}
+}
+label.radio-wrap , .form-row label.radio-wrap {
+	cursor: pointer; display: inline-block; 
+}
+.radio-wrap {
+	input[type="radio"] {
+		position: absolute; opacity: 0;
+	}
+	.radio-label {
+		position: relative; padding-left: 26px; cursor: pointer;
+		&::before {
+			position:absolute; content: "";  left: 0; top: 1px;  
+			width: 18px; height: 18px; 
+			background: url('../images/radio-bg.png') left top no-repeat;
+		}
+	}
+	input[type="radio"]:checked +.radio-label {
+		&::before { 
+			background-position:-19px 0;
+		}
+	}
+}
+.radio-group {
+	.radio-wrap {
+		margin-right: 15px;
+	}
+}
+.check-wrap {
+	input[type="checkbox"] {
+		position: absolute; opacity: 0;
+	}	
+	.chk-label {
+		position: relative; display: block; cursor: pointer;
+		&:before{
+			border:2px solid $grey2; display: inline-block; width: 18px; height: 18px; background: $white;
+			content:""; margin:0px 10px 0 0; float: left; cursor: pointer; @include border-radius(2px);
+		}
+	}
+	input[type="checkbox"]:checked + .chk-label::after {
+		content: "\e94a"; font-family: "spinshopping_gen" !important;
+		color: $skyblue; position: absolute; left: 2px; top: -3px;
+		font-size: 16px;
+	}
+	&.check-wrap-inline {
+		label {
+			display: inline-block;
+		}
+	}
+}
+
+/* select */
+
+.custom-select {
+	-webkit-appearance: none;
+  -moz-appearance: none;
+}
+.content-wrapper {
+	.borderRadiusTp {
+		background:$gold-yellow ; 
+	}
+	.dd {
+		li, .border {
+			@include border-radius(0!important) ;
+		}
+		.ddChild {
+			min-height: auto;
+			li {
+				border-bottom: none;
+			}
+		}
+		.ddArrow {
+			margin-top: 0;
+			position:absolute; right:0px; top: 0px; height: 28px;
+			width: 28px; border-left: 1px solid $grey2; cursor: pointer;
+			background: $grey4; color: $grey;
+
+			&:after {
+				position:absolute; right:9px; top: 12px;
+				content: ""; width: 0; 	height: 0; 
+				border-left: 5px solid transparent;
+				border-right: 5px solid transparent;  
+				border-top: 6px solid $grey;
+			}
+		}
+	}
+	.ddcommon {
+		height: 30px;
+	}
+	.ddTitleText  {
+		height: 28px; white-space: nowrap; overflow: hidden;
+		display: block; text-overflow: ellipsis;
+	}
+}
+select:not([multiple]) {
+	-moz-appearance: none;
+	background-image: url("../images/arrows-bg.svg"), linear-gradient(#e3e3e3, #e3e3e3), linear-gradient(#adadad, #adadad);
+	background-position: calc(100% - 12px) -35px, 100% center, calc(100% - 33px) 0;
+	background-repeat: no-repeat;
+	background-size: auto auto, 33px 100%, 1px 100%;
+	display: inline-block;	line-height: normal;
+	min-width: 80px;	padding-right: 44px;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
+	appearance: none;
+    text-overflow: '';  border:1px solid $grey2;   cursor: pointer;
+	option {
+		padding:4px 0;  line-height: 1.2; font-size: $font-14; text-indent: 5px;
+	}
+}
+select::-ms-expand {
+  display: none;
+}
+.form-row {
+	padding-bottom:8px;
+	label {
+		display:block; padding-bottom: 2px;
+	}
+}
+.star-top {
+	color: $red;
+}
+
+/*   For Tab  */
+
+.tab-list {
+  border-bottom: 1px solid $grey2; 
+  li {
+    float:left; margin:0 -1px -1px 0; line-height: 1;
+    >a {
+    	border: 1px solid $grey2; display: inline-block; 
+    	padding:8px 10px 7px 10px; color: $grey;
+    	&:hover{
+    		background:$white;
+    	}
+    }
+    &.active {
+    	>a {
+    		background: $white; border-bottom-color: transparent;
+    	}
+    }
+  }
+  &::after{
+  	content: ""; display: table; width: 100%;
+  }
+  .lang-label {
+  	padding:25px 0 0 5px;
+  }
+}
+
+
+.spinner  {
+	position: relative; width: 65px; display: inline-block;
+	input[type="text"] {
+		padding-right: 25px;
+	}
+	.glyphicon  {
+		position: absolute; right: 1px; top: 1px; font-size: 11px;
+		cursor: pointer; padding:1px 2px 1px 3px; border-left: 1px solid $grey2;
+		background: $grey4; 
+		color: $grey; height: 49.5%;
+
+		&:hover {
+			color:$skyblue;
+		}
+	}
+	.glyphicon-triangle-bottom {
+		bottom: 1px; top: auto;  border-top: 1px solid $grey;
+	}
+}
+
+/*  For table  */
+
+table {
+	width: 100%;
+}
+th {
+	padding:8px 10px;
+}
+td {
+	border:1px solid $grey2;
+	padding:8px 10px; 
+
+	img {
+		border:1px solid $grey2; float: left;
+		margin-right: 5px;
+	}
+	&:last-child {
+		text-align: center;
+	}
+}
+.scroll-table {
+	overflow-x: auto; 
+	padding:0 1px 15px 1px;
+	.table {
+		width: 1500px;
+	}
+}
+.table-wrapper {
+	display: inline-block; width: 100%; padding-bottom: 10px;
+}
+.table, .table-resize {
+	display: table; width: 100%; border-collapse: collapse;
+	font-size: $font-14;
+}
+.table {
+	.active-btn , .inactive-btn {
+		padding:2px 5px; @include border-radius(4px); cursor: pointer;
+		font-size:$font-10; color: $white;  display: inline-block;
+		min-width: 42px;
+	}
+	.active-btn {
+		background: $skyblue; 		
+	}
+	.inactive-btn {
+		background: $red-light ;
+	}
+	.edit-view {
+		color: $skyblue;
+		a {
+			color: $skyblue;
+		}
+	}
+	.head-border {
+		li {
+			border:none;
+		}
+	}
+	li{
+		&.pending {
+			background: #f7f7d9;
+		}
+		&.pkg-send {
+			background: #c5ffe3;
+		}
+	}
+	.active {
+		background: $skyblue; color: $white;
+		@include border-radius(5px); padding:2px 5px;
+		font-size: $font-10; 
+	}
+	.inactive {
+		background: $red-light; color: $white;
+		@include border-radius(5px); padding:2px 5px;
+		font-size: $font-10;
+	}
+	.spinner {
+		display: inline-block;
+	}
+	li {
+		&.completed {
+			
+		}
+		&.process {
+			background: #f8f7d9;
+		}
+		&.expire {
+			background: $red-light;
+		}
+		&.cancel {
+			background: #c9ebf4;
+		}
+	}
+}
+.table-header, .table-content {
+	display: table-row-group; width: 100%;
+	li {
+		display: table-cell; padding:9px 9px;
+		border:1px solid $grey2; vertical-align: middle;
+		li {
+			border:none;
+		}
+	}
+	ul {
+		display: table-row;  
+		ul {
+			display: block;
+			li {
+				display: block;
+			}
+		}
+	}
+}
+.table-header {
+	li {
+		padding:10px 9px; font-size: $font-16; background: $grey4;
+	}	
+}
+.table-footer {
+	font-size: $font-16;
+}
+.table-full {
+	.table-content  {
+		ul:nth-of-type(even) {
+			background: $grey4;
+		}	
+		.btn-md  {
+			font-size: $font-14;
+		}
+		li {
+			padding:8px;
+		}
+	}
+	.table-header {
+		li {
+			border-left: 1px solid $grey2;  border-right: 1px solid $grey2;
+			 background:#d1d2d2; font-size: $font-14;
+		}
+	}
+}
+.filter-action {
+	.action-left {
+		display: inline-block; padding-top: 15px; padding-bottom: 10px;
+		select {
+			width: 250px; margin-right: 10px;
+		}
+	}
+	.filter-action-icon , .setting  {
+		border: 1px solid $grey2; display: inline-block;
+		margin-right: 8px; cursor: pointer; height: 30px;
+		vertical-align: top; line-height: 28px; padding:0 5px;
+		background: $grey4;
+		img {
+			margin-top: 4px; 
+		}
+	}
+	.setting  {
+		background: $white;
+	}
+	.pager {
+		padding-top: 15px;
+		select {
+			width: 80px; margin-right: 10px;
+		}
+		input[type="text"] {
+			width: 50px; margin:0 10px;
+		}
+		.prev, .next {
+			border: 1px solid $grey2; display: inline-block;
+			margin-left: 10px; cursor: pointer; height: 30px;
+			vertical-align: top; line-height: 28px; padding:0 5px;
+			background: $grey4; font-size: $font-14;
+		}
+	}
+}
+
+/*  For pagingnation  */
+
+.pagination {
+	text-align: center; padding-top: 12px; margin-bottom: 10px;
+	li {
+		display: inline-block; margin-left: 15px;
+		&.prev, &.next {
+			background: $skyblue; color: $white; cursor: pointer;
+			padding:0px 6px; @include border-radius(50%); line-height: 18px;
+		}
+		a {
+			min-width: 20px; display: inline-block; 
+			@include border-radius(50%);
+			&:hover {
+				background: $skyblue; color: $white;
+			}
+		}
+		&.active {
+			a {
+				background: $skyblue; color: $white;
+			}
+		}
+		&.pagination-prev,&.pagination-next {
+			a {
+				background: $skyblue; color: $white; cursor: pointer;
+				padding:0px 6px; @include border-radius(50%); line-height: 20px;
+			}
+		}
+	}
+}
+
+/* Checkbox on and off */
+
+.onoffswitch-checkbox {
+  display: none;
+}
+.onoffswitch {
+  position: relative; width: 54px; height: 22px;
+}
+.onoffswitch-label {
+  display: block; overflow: hidden; cursor: pointer; 
+  border: 1px solid $grey2; @include border-radius(12px);
+  padding-bottom: 0 !important;
+}
+.onoffswitch-inner {
+  display: block; width: 200%; margin-left: -100%;
+  transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+  display: block; float: left; width: 50%; height: 18px; padding: 0; line-height: 18px;
+  font-size: 14px; color: white; box-sizing: border-box; padding-top: 1px;
+}
+.onoffswitch-inner:before {
+  content: "ON";   padding-left: 8px;
+  background-color: $skyblue; color: $white;
+}
+.onoffswitch-inner:after {
+  content: "OFF";   padding-right: 5px;
+  background-color: #eee; color: $grey;
+  text-align: right;
+}
+.onoffswitch-switch {
+  display: block; width: 20px;  height: 20px;
+  background: $white;
+  position: absolute; top: 0; bottom: 0;
+  right: 34px;
+  border: 1px solid $grey2; @include border-radius(50%);
+  transition: all 0.3s ease-in 0s; 
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+  margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+  right: 0px; 
+}
+
+/* For Date Picker */
+
+.date-select {
+	position: relative; background:$gold-yellow url('../images/date-picker.jpg') right top no-repeat !important; 
+}
+
+/*  For Loader */
+
+.loader {
+  border: 14px solid $grey4;
+  @include border-radius(50%);
+  border-top: 14px solid $black;
+  /*border-bottom: 14px solid $black;*/
+  width: 100px;  height: 100px; display: inline-block;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+
+  &.loader-medium {
+  	width: 40px; height: 40px; border-width: 6px;
+  }
+  &.loader-small {
+  	width: 20px; height: 20px; border-width: 3px; vertical-align: middle;
+  	margin:0 5px;
+  }
+}
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

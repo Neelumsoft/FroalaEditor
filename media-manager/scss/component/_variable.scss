@@ -1,0 +1,98 @@
+
+/*  Variable and Mixins  */ 
+
+$black       : #000;
+$black2      : #231f20;
+$black-light : #424242;
+
+$white   : #fff; 
+
+$red       : #fc1f03;
+$red2      : #ce386a;
+$red3      : #ffb6ce;
+$red-light : #ee4577;
+$red-dark  : #a52f5c;
+$red-lighter : #ffe6e8; 
+
+$pink :#ffdede; 
+
+$grey 	 : #707171;
+$grey2   : #bababa;
+$grey3   : #333333;
+$grey4   : #eaeae9;
+$grey5   : #cecece;
+$grey6   : #565656;
+$grey7   : #f2f2f2;
+$grey-light : #a5a5a5;
+
+$skyblue : #27bdbe;
+$skyblue2 : #3da5a0;
+$skyblue3	: #3c8e8c;
+$skyblue4	: #ccfff8;
+$skyblue5	: #e4f9f8;
+$skyblue-light : #94d5d7;
+
+$orange-dark: #ff8b00;
+
+$green : #37cc00;
+$green2 : #00bc59;
+$green3 : #19b15e;
+$green-light : #5ae5ac;
+
+$blue-light : #29b3ff;
+$blue 		: #22a4dd;
+$blue2      : #436bb3;
+$blue-dark  : #228dbc;
+
+$yellow       : #f9b303;
+$yellow-light : #d8b661;
+$yellow2      : #bca779;
+$gold-yellow  : #f9ffd9;
+
+$voilet-light :#e5a9ed;
+
+$golden :#f8b203;
+
+
+$cyan  :#26c1e2;
+$cyan2  :#0987a2;
+
+$font-cloud-b   : 'cloudbold';
+$font-cloud-l   : 'cloud_lightlight';
+
+$z-normal   :  99;
+$z-medium   :  100;
+$z-hight    :  101;
+$z-heighest :  9999;
+
+$font-h1 : 36px;
+$font-h2 : 26px;
+$font-h3 : 20px;
+$font-10 :10px;
+$font-12 :12px;
+$font-13 :13px;
+$font-14 :14px;
+$font-15 :15px;
+$font-16 :16px;
+$font-18 :18px;
+$font-20 :20px;
+$font-22 :22px;
+$font-24 :24px;
+
+/* Mixin start here  
+=====================================*/
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+@mixin invisible {
+  visibility: hidden !important;
+}
+@mixin size($width , $height) {
+	width: $width;
+	height: $height;
+}
+

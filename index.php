@@ -223,7 +223,7 @@ $(document).ready(function(e) {
 window.userFolderDefaultPath = '<?php echo $user_folder; ?>';
 $('#edit').froalaEditor({
 	enter: $.FroalaEditor.ENTER_BR,
-	
+	videoInsertButtons: ['videoBack', '|', 'videoByURL', 'videoEmbed',],
 	//Folder Path
 	userFolderDefaultPath: window.userFolderDefaultPath,
 	

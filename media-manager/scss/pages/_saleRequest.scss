@@ -1,0 +1,226 @@
+/*  Request sale page */
+
+.seach-export {
+	float: right;  margin-right: 25px; margin-top: 3px;
+	.search-req-sale {
+		float:left; position: relative; margin-right: 5px;
+		input[type="text"] {
+			padding-left: 30px; background: $white; font-size: $font-16; color: $grey;
+			max-width: 500px; width: 100%;
+		}
+		button[type="submit"] {
+			position: absolute; left: -5px; top: 0;
+			font-size: $font-16 !important; height: 30px; line-height: 26px;
+			border:none; background: none;  
+		}
+		span {
+			color: $grey; display: block;
+		}
+	}
+	button {
+		margin-left: 8px; font-size: $font-20;
+	}
+	::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+	  color: $grey;
+	}
+	::-moz-placeholder { /* Firefox 19+ */
+	  color: $grey;
+	}
+	:-ms-input-placeholder { /* IE 10+ */
+	  color:$grey;
+	}
+	:-moz-placeholder { /* Firefox 18- */
+	  color: $grey;
+	}
+}
+.request-sale-tab {
+	.select-tag-btn {
+		padding-bottom: 20px;
+	}
+}
+.req-btn-group {
+	text-align: right;
+	button {
+		margin:0 0 0px 10px; font-size: $font-18; 
+	}	
+}
+.req-sale-table {
+	max-width: 1200px;
+	.table-header ,.table-content {
+		li {
+			vertical-align: middle;
+			&:last-child {
+				width:100px; 
+			}
+		}
+		li +li {
+			width: 20%; text-align: center;
+		}
+		li+li+li {
+			width: 15%; text-align: center; 
+		}
+		button {
+			font-size: $font-18;
+		}
+	}
+	.table-header {
+		li {
+			border:none; 
+		}
+		.coutid{
+			padding: 0 10px;
+		}
+	}
+	.table-content{
+		li {
+			a , .prod-name{
+				color: $skyblue; display: inline-block; vertical-align: top;
+			}		
+			img {
+				border:1px solid $grey2; margin:0 10px;
+			}	
+			&:first-child {
+				span.count, input[type="checkbox"] {
+					vertical-align: top; line-height: 30px; display: inline-block;
+					margin-top: 8px;
+				}
+				input[type="checkbox"] {
+					margin-top: 15px; float: left;
+				}
+				span.count {
+					padding:0 10px;
+				}
+			}
+		}
+		li+li+li {
+			color: $skyblue;
+		}
+	}
+}
+
+/*  Request deatail */
+
+.req-detail-box {
+	width: 100%; max-width: 1240px;
+	margin-top: 25px;
+	.seach-export  {
+		width: 100%; margin: 5px 0;
+		.search-req-sale {
+			padding-left: 0; margin:0 0 10px 0;
+		}
+		.btn-group {
+			text-align: right; padding-right: 0;
+		}
+	}
+	.pdf-list {
+		line-height: 34px; 
+		a {
+			display: inline-block; vertical-align: top; margin-right: 15px;
+			&:hover,&:hover .icon-doc {
+				color:$skyblue;
+			}
+		}
+		.icon-doc {
+			font-size: 28px;  float: left; margin-right: 10px;
+		}
+	}
+	.btn-download {
+		font-size: $font-20; display: inline-block;
+		color: $skyblue; background: $grey4;
+		border:1px solid $grey2; width: 100%; 
+		max-width: 290px; margin-top: 8px;
+
+		&:hover{
+			background:$grey2; color: $white;
+		}
+	}
+}
+.sal-req-img {
+	float: left; 
+	padding-right: 3%;
+	img {
+		border:1px solid $grey2; max-width: 100%;
+	}
+}
+.sal-req-detail {
+	float: left; width: 60%;
+	.sal-detail-row {
+		padding-bottom: 8px;
+		.tag {
+			border:1px solid $grey2; display: inline-block;
+			vertical-align: top; padding:2px 5px 1px 5px; line-height: 18px;
+		}
+	}
+}
+.req-detail-table {
+	.table-header {
+		li {
+			border:none;
+		}
+	}
+	.table-header, .table-content {
+		li {
+			vertical-align: middle; text-align: center;
+			&:first-child {
+				text-align:left; width: 28%;
+				input[type="checkbox"] {
+					margin:0 5px; 
+				}
+				.coutid {
+					width: 34px; text-align: center; display:inline-block; vertical-align: top;
+				}
+				img {
+					margin-right: 5px; @include border-radius(50%);
+					border:1px solid $grey2; max-width: 40px;
+				}
+			}
+			&:nth-of-type(2) {
+				width: 12%;
+			}
+			&:nth-of-type(3) {
+				width: 55px;
+			}
+			&:nth-of-type(4) {
+				width: 15%;
+			}
+			&:nth-of-type(5) {
+				width: 110px;
+			}
+			&:nth-of-type(6){
+				text-align: left;
+			}
+			&:last-child {
+				width: 100px;
+			}			
+		}
+	}
+	.prod-name {
+		color: $skyblue;
+	}
+	.table-content {
+		li:first-child {
+			vertical-align: top;
+			.prod-name, input[type="checkbox"], .coutid {
+				vertical-align: top; display: inline-block; margin-top: 5px;
+			}
+		}
+	}
+}
+@media all and (min-width: 1600px) {
+	.seach-export {
+		button {
+			min-width: 175px;
+		}
+		.search-req-sale {
+			min-width: 375px;
+			button {
+				min-width: auto;
+			}
+		}
+		.btn-group {
+			button {
+				min-width: 190px;
+			}
+		}
+	}
+}

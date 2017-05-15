@@ -1,0 +1,119 @@
+
+/*
+ Seller CMS page
+===========================================*/
+
+.cms-table {
+	.table-header , .table-content {
+		ul {
+			background: none;
+		}
+		ul> li {
+			&:first-child {
+				width:25px; text-align: center;
+			}
+			&:last-child {
+				width: 70px; text-align: center;
+				a {
+					color: $skyblue;
+					&:hover {
+						color:$black;
+					}
+				}
+			}
+		}
+		.status , .disable, .enable {
+			width: 76px; text-align: center;
+		}
+		.cdate, .udate {
+			width: 130px; text-align: center;
+		}
+	}
+	.table-header {
+		li {
+			background: none; border:none;
+		}
+	}
+	.table-content {
+		ul:nth-child(even) {
+			background: $white;
+		}
+		li{
+			&.enable {
+				background: $skyblue4; cursor: pointer;
+			}
+			&.disable {
+				background: $pink; cursor: pointer;
+			}
+		}
+	}
+}
+.cms-manage-tab {
+	.lang-nav-tabs{
+		>li > a {
+			line-height: 20px; 
+		}
+	}
+}
+.cms-manage-tab {
+	.tab-content {
+		padding-top: 5px;
+	}
+	label {
+		padding-bottom: 2px;
+	}
+	textarea {
+		height: 145px; resize: auto;
+	}
+	.form-row {
+		width: 60%; padding-bottom: 12px;
+
+		input[type="text"] ,input[type="tel"],input[type="email"], select {
+			width: 40%;
+		}
+		&.text-editor {
+			max-width: 1000px;
+		}
+	}
+	.cms-lang {
+		border-top: 1px solid $grey2; margin-top: 15px;
+		padding-top: 25px;
+		label {
+			.suggest-msg {
+				color: $skyblue; font-size: $font-12; padding-top: 4px;
+			}
+		}
+	}
+	.btn-group-row {
+		text-align: right;
+		button, btn-md {
+			font-size: $font-20; margin-left: 10px;
+		}
+	}
+}
+.cms-manage-tab [id*="cms-content-tab"]  {
+	.form-row {
+		input[type="text"] {
+			width: 100%;
+		}
+	}
+}
+#cms-page-content {
+	.lang-nav-tabs {
+		margin-top: 6px;
+	}
+}
+.text-editor {
+	padding:18px 0  3px 0;
+}
+@media all and (min-width: 1500px) {
+	.cms-table {
+		.table-header , .table-content { 
+			ul>li {
+				&:nth-child(2){
+					width: 35%;
+				}
+			}
+		}
+	}	
+}

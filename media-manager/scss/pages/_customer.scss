@@ -1,0 +1,147 @@
+
+/*  Customer page */
+
+.seller-breadcrumbs {
+	.breadcrumb {
+		padding-top: 0;
+		>li+li {
+			&:before {
+				content: "/"; padding:0 2px;
+			}
+		}
+	}
+}
+.customer-group-table {
+	border-top: 1px solid $grey2; padding-top: 3px;
+	.table {
+		max-width: 900px; width: 100%;
+		li {
+			text-align: center; 
+			&:first-child {
+				text-align:left; width: 42%;
+			}
+			&:nth-child(2) {
+				width: 25%;
+			}
+			.coutid {
+				width: 60px; display: inline-block; text-align: center;
+			}
+		}
+	}
+	.table-header {
+		li {
+			border:none;
+		}
+	}
+	.pagination  {
+		max-width: 900px; margin-top: 10px;
+	}
+	.prod-name {
+		color: $skyblue;
+	}
+}
+.customer-newgroup {
+	width: 100%; max-width: 675px;
+	.tab-box {
+		padding-top: 5px;
+	}
+	label {
+		padding-bottom: 2px;
+	}
+	button {
+		margin-top: 5px;
+	}
+}
+.customer-detail {
+	max-width: 900px;
+	.customer-detail-box {
+		display: table; width: 100%;
+	}
+	h2 {
+		padding-bottom: 2px;
+	}
+}
+.customer-detail-box {
+	border:1px solid $grey2; padding:10px;
+	margin-bottom: 15px; 
+	.customer-pic, .cust-detail-content {
+		display: table-cell; vertical-align: top;
+		font-size: $font-14;
+	}
+	.customer-pic {
+		width: 132px; text-align: center;
+		a {
+			line-height: 1; 
+			img {
+				border:1px solid $grey2;
+				@include border-radius(50%);
+			}
+		}
+		span, a {
+			display: block;
+		}
+		.custGroup {
+			padding:2px 0;
+		}
+		.custGroup-type {
+			border-top: 1px solid $grey2; padding-top: 10px; 
+			margin-top: 5px;
+			span{
+				padding-bottom: 5px;
+			}
+			a {
+				color: $skyblue;
+			}
+		}
+	}
+	.cust-detail-content {
+		padding:0 5px 0 12px;
+	}
+}
+.cust-detail-content {
+	.date {
+		float: right;
+	}
+	.customerid, .rank-group {
+		padding-top: 6px; display: block;
+	}
+	.about-cust {
+		border-top:1px solid $grey2; margin-top: 5px; padding-top: 5px;
+		.col-sm-6 {
+			padding-top: 5px;
+		}
+	}
+	.cust-add-tag {
+		border:1px solid $grey2; margin-top: 10px;
+		padding:8px; background: $grey4;
+	} 
+	.addTag {
+		background: $skyblue; color: $white;
+		display: inline-block; padding:3px 15px 2px 15px;
+		font-size: $font-20; cursor: pointer;
+		small {
+			font-size: $font-20;
+		}
+		&:hover{
+			background: $skyblue2;
+		}
+	}
+}
+.customer-detail-table {
+	.table-header,.table-content {
+		li {
+			width: 25%; text-align: center;
+			&:first-child {
+				text-align:left;
+			}
+		}
+	}
+	.table-header {
+		li {
+			border:none;
+		}
+	}
+	.sno {
+		display: inline-block; width: 40px; text-align: center;
+	}
+}

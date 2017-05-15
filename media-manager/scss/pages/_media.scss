@@ -1,0 +1,226 @@
+/*
+/*  Media page */
+
+.sidebar-content {
+	.content-midleft {
+		width: 23%; max-width: 270px; float: left;
+		margin-right: 1.5%;
+	}
+	.content-midright {
+		float: right; width: 75.5%;
+	}
+}
+.content-midleft {
+	.seller-heading { 
+		span {
+			width: 100%; padding:2px 12px 0 12px;
+		}
+	}
+	.root-box, .root-box-top {
+		border:1px solid $grey2; background: $white;
+		padding:10px; margin-bottom: 10px; clear:both;
+	}
+}
+.root-box-top {
+	.glyphicon-folder-close {
+		color: $gold-yellow; 
+		background: $grey; 
+		text-align: center;
+	}
+	.foldericon-root {
+		border:1px solid $grey2; width: 42px; height: 42px; text-align: center;
+		float: left; margin-right: 8px; background: $white; 
+		.icon {
+			background: url('../images/folder-root.png') left top no-repeat;
+			width: 23px; height: 20px; display: inline-block; margin-top: 10px;
+		}
+	}
+	.ficon-txt {
+		background: $skyblue; color: $white; height: 42px; text-align: center;
+		padding:11px 2px; display: block; font-size: $font-18;
+		width: 197px; overflow:hidden; text-overflow: ellipsis; white-space: nowrap;	
+	}
+	.root-listitem {
+		height: 42px; width: 42px; display: inline-block; width: 100%;
+	}
+	li {
+		ul {
+			padding:10px 0 0 32px;
+			
+			.foldericon-root {
+				.icon {
+					background: url('../images/folder-subroot.png') left top no-repeat;
+				}
+			}
+			.ficon-txt {
+				width: 164px;
+			}
+		}
+	}
+}
+.view-list-icon {
+	.glyphicon  {
+		cursor: pointer; border:1px solid $grey2; float: left; padding:1px 2px 2px 2px;
+		color: $skyblue; margin-left: 7px; font-size: 24px;
+	}
+	.glyphicon-th-large {
+		padding-right: 1px;
+	}
+}
+.media-box {
+	background: $white; border:1px solid $grey2;
+	clear: both; padding:10px 10px 15px 20px; margin-top: 10px;
+	display: inline-block; width: 100%;
+	.media-header {
+		position: relative; margin:0 -10px 0 -20px; padding:0 10px 12px 20px;
+		&:after {
+			position:absolute; content: ""; border-bottom: 1px solid $grey2;
+			left: 0px; bottom: 0; width: 100%; 
+		}
+	}
+	.media-category-name {
+		padding: 10px 0 2px 0; display: inline-block; line-height: 1;
+	}
+	.media-btn-group {
+		padding-top: 10px;
+		button {
+			float: left; margin-right: 10px;
+		}
+		.disable {
+			color: $white; background: $grey5;
+		}
+	}
+}
+.imp-fb {
+	background: #3b5998; 
+	&:hover{
+		background: #3b5998; border-color: #3b5998;
+	}
+}
+.img-insta {
+	background: #a0725a;
+	&:hover{
+		background: #a0725a; border-color: #a0725a;
+	}
+}
+.no-media {
+	font-size: $font-22;
+}
+.media-upload-item {
+	margin-top: 15px;	
+	.media-list-item {
+		max-height: 650px; overflow-y: auto;
+		> li {
+			float: left; width: 31.1%; margin:10px 3% 15px 0;
+
+			&:nth-of-type(3n){
+				margin-right: 0;
+			}
+		}
+	}
+	.list-view {
+		> li {
+			width: 100%; margin-right: 0;
+			img {
+				width: auto;
+			}
+		}
+	}
+	.media-product-img {
+		position: relative; display: block; height: 202px; 
+		>img {
+			display: block; width: 100%; height: 100%; 
+			border:1px solid $grey2;
+		}
+		.check-wrapper {
+			position: absolute; right: 5px; top: 8px; width: 28px;
+			display: none; z-index: 99;
+			.checkbox-label {
+				display: block; 
+				&:before {
+					background:$white; border-width: 1px; width: 25px; height: 25px;
+					@include border-radius(4px);
+				}
+			}
+			.checkbox:checked + label::after {
+				font-size: 26px; top: -6px;
+			}
+		}
+	}
+}
+.modal-lg {
+	width: 930px;
+}
+.media-modal {
+	.modal-header {
+		border-bottom: 1px solid $grey2; padding:8px 10px 5px 25px;
+		.close {
+			border:none;  opacity: 1;
+			.icon-remove {
+				color: $grey;
+				&:hover {
+					color:$skyblue;
+				}
+			}
+		}
+	}
+	.media-detail-img {
+		padding-right: 10px;
+		img {
+			width: 100%;
+		}
+	}
+	.modal-body {
+		padding-top: 18px;
+	}
+	.carousel-control {
+		width: 35px; top: 45%; font-size: 28px; opacity: 1;
+		&.left {
+			left: -42px;
+		}
+		&.right {
+			right: -42px;
+		}
+	}
+}
+.media-img-deatail {
+	border-bottom: 1px solid $grey2; padding-bottom: 10px;
+	margin-bottom: 20px;
+	.form-row {
+		padding-bottom: 0; font-size: $font-14;
+		span {
+			color: $grey2;
+		}
+	}
+}
+.media-form {
+	border-bottom: 1px solid $grey2; margin-bottom: 10px; 
+	.form-row {
+		padding-bottom: 10px;
+		.label {
+			float: left; width: 20%; text-align: right;
+			color: $grey2;
+		}
+	}
+	.form-item {
+		float: right; width: 75%; overflow:hidden;
+		font-size: $font-14;
+		input , select, textarea {
+			width: 100%;
+		}
+	}
+	textarea {
+		height: 85px;
+	}
+	.upload-name {
+		font-size: $font-16;
+	}
+}
+.media-footer {
+	.label {
+		float: left; color: $red3;
+	}
+	.form-item {
+		float: right;
+	}
+}

@@ -1,0 +1,38 @@
+/*  Report page */
+
+.detail-repbox {
+	.form-row {
+		margin-bottom: 10px;
+	}
+	.update-btn {
+		button{
+			margin-top: 2px;
+		}
+	}
+}
+.report-export-table {
+	border-top: 1px solid $grey2;  padding:20px 0; margin-top: 15px;
+	.export-row {
+		label {
+			float: left; margin:5px 10px 0 0;
+		}
+		select {
+			width: 145px; float: left;
+		}
+	}
+}
+.glyphicon-new-window {
+	color: #72d032;
+}
+.rep-export-table {
+	width: 100%; max-width: 1200px;	
+	.table {
+		li {
+			text-align: center; max-width: 13%; word-wrap: break-word;
+			font-size: $font-14;
+			&:last-child {
+				width:90px;
+			}
+		}
+	}
+}

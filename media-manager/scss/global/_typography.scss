@@ -1,0 +1,138 @@
+
+/*
+	common css
+======================*/
+body {
+  padding:0px;
+  font:normal 16px/1.25 'cloud_lightlight';
+  color:$grey;
+  background: $grey4;
+}
+html {
+	position: relative;
+	min-height: 100%;
+}
+
+h1, .h1 { font-size: $font-h1; }
+h2, .h2 { font-size: $font-24; }
+h3, .h3 { font-size: $font-h3; }
+
+p {
+	margin-bottom:8px;
+}
+li {
+	list-style: none;
+}
+a {
+	color:$grey;	
+	&:hover, &:focus {
+		color:$skyblue;	 outline:none;
+	}
+}
+.ft-lt {
+  float: left !important;
+}
+.ft-rt {
+  float: right !important;
+}
+.ft-none {
+  float: none !important;
+}
+.txt-center {
+	text-align:center;
+}
+.txt-lt {
+	text-align:left;
+}
+.txt-rt {
+	text-align:right;
+}
+.nopadding  {
+	padding:0 !important;
+}
+.pos-f-t {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: $z-medium;
+}
+.mt-10 {
+	margin-top:10px;
+}
+.mb-10 {
+	margin-bottom: 10px;
+}
+.mr-10 {
+	margin-right: 10px;
+}
+.ml-10 {
+	margin-left: 10px;
+}
+.mt-5 {
+	margin-top:5px;
+}
+.mb-5 {
+	margin-bottom: 5px;
+}
+.mr-5 {
+	margin-right: 5px;
+}
+.ml-5 {
+	margin-left: 5px;
+}
+.rank-group {
+	span {
+		color:$golden;
+	}
+}
+.icon-remove {
+	cursor: pointer;
+} 
+.strick {
+	color: $red;
+}
+
+/*  Common Class  */
+
+.clearfix:after {
+	visibility: hidden; display: block; font-size: 0;
+	content: " "; clear: both; height: 0;
+}
+.clearfix { display: inline-block; }
+* html .clearfix { height: 1%; }
+.clearfix { display: block; }
+
+.block {
+	display: block;
+}
+.skyblue {
+	color: $skyblue;
+}
+[class*="icon-rank"] {
+	color: $golden !important;
+}
+.messagebox {
+	font-size: 22px; line-height: 22px; border:1px solid $grey2; 
+	padding:10px 35px; color: $grey; margin-top: 2px;
+	&.wait {
+		background: $gold-yellow; 
+	}	
+	&.response {
+		background: $skyblue4; 
+	}	
+	&.reject {
+		background: $red-lighter; 
+	}	
+}
+
+/*  For amount  */
+.discount {
+	text-decoration: line-through;
+}
+.discount-price {
+	color: $red-light;
+}
+
+
+

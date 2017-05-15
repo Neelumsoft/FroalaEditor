@@ -90,6 +90,7 @@
 			});
 			
 			$(document).on('click','#fr-del-selected-local',function(){
+				if($('.fr-image-list .fr-image-container.fr-fb-selected').length>0){
 				var sFiles = [];
 				$('.fr-image-list .fr-image-container.fr-fb-selected').each(function(index, element) {
 					el = $(element).find('img');
@@ -97,10 +98,12 @@
                 });
 				
 				delFiles(sFiles);
+				}
 			});
 			$(document).on('click','#fr-del-all',function(){
-				
+				if($('.fr-image-list .fr-image-container').length>0){
 				delFiles('deleteAll');
+				}
 			});
 			
 			$(document).on('ImageManager.LoadFacebookImages',function(event,r){

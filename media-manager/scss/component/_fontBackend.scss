@@ -1,0 +1,112 @@
+@font-face {
+  font-family: 'spinshopping_backend';
+  src:  url('../fonts/spinshopping_backend.eot?e6e5aq');
+  src:  url('../fonts/spinshopping_backend.eot?e6e5aq#iefix') format('embedded-opentype'),
+    url('../fonts/spinshopping_backend.ttf?e6e5aq') format('truetype'),
+    url('../fonts/spinshopping_backend.woff?e6e5aq') format('woff'),
+    url('../fonts/spinshopping_backend.svg?e6e5aq#spinshopping') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.icon-buyer-menu1, .icon-buyer-menu2, .icon-buyer-menu3,
+.icon-buyer-menu4, .icon-buyer-menu5 , .icon-buyer-profile,
+.icon-seller-menu1 , .icon-seller-menu2 , .icon-seller-menu3,
+.icon-seller-menu4, .icon-seller-menu5 , .icon-seller-menu6,
+.icon-seller-menu7 , .icon-seller-menu8 ,.icon-seller-menu9,
+.icon-seller-menu10 {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'spinshopping_backend';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+
+.icon-buyer-menu1:before {
+  content: "\e944";
+}
+.icon-buyer-menu2:before {
+  content: "\e945";
+}
+.icon-buyer-menu3:before {
+  content: "\e946";
+}
+.icon-buyer-menu4:before {
+  content: "\e947";
+}
+.icon-buyer-menu5:before {
+  content: "\e948";
+}
+.icon-buyer-profile:before {
+  content: "\e949";
+}
+.icon-seller-menu1:before {
+  content: "\e952";
+}
+.icon-seller-menu2:before {
+  content: "\e953";
+}
+.icon-seller-menu3:before {
+  content: "\e954";
+}
+.icon-seller-menu4:before {
+  content: "\e955";
+}
+.icon-seller-menu5:before {
+  content: "\e956";
+}
+.icon-seller-menu6:before {
+  content: "\e957";
+}
+.icon-seller-menu7:before {
+  content: "\e958";
+}
+.icon-seller-menu8:before {
+  content: "\e959";
+}
+.icon-seller-menu9:before {
+  content: "\e95a";
+}
+.icon-seller-menu10:before {
+  content: "\e95b";
+}
+
+
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('../fonts/fontawesome-webfont.eot?v=4.7.0');
+  src: url('../fonts/fontawesome-webfont.eot?#iefix&v=4.7.0') format('embedded-opentype'), url('../fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2'), url('../fonts/fontawesome-webfont.woff?v=4.7.0') format('woff'), url('../fonts/fontawesome-webfont.ttf?v=4.7.0') format('truetype'), url('../fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+.fa {
+  display: inline-block;
+  font-family:  'FontAwesome' !important;
+  font-size: inherit;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.fa-star:before {
+  content: "\f005"; color:#ffd700;
+}
+.fa-star-o:before {
+  content: "\f006";  color:#ffd700;
+}
+.fa-star-half:before {
+  content: "\f089"; color:#ffd700;
+}
+.fa-star-half-empty:before,
+.fa-star-half-full:before,
+.fa-star-half-o:before {
+  content: "\f123"; color:#ffd700;
+}

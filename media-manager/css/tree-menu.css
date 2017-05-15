@@ -1,0 +1,226 @@
+f
+
+.feature-content {
+	max-width: 600px;
+}
+.iui-checkbox-box {
+	border: 0;
+	width: 16px;
+	height: 16px;
+}
+.iui-checkbox-checked {
+	background-image: url("../../assets/images/checkbox-checked.png");
+}
+.iui-checkbox-unchecked {
+	background-image: url("../../assets/images/checkbox-unchecked.png");
+}
+.iui-checkbox-indeterminate {
+	background-image: url("../../assets/images/checkbox-unchecked.png");
+}
+.directive {
+	min-height: 300px;
+}
+.control-panel {
+	margin-left: 35px;
+	width: 250px;
+}
+.check-list {
+	background: white;
+	border: thin solid #cecece;
+	border-radius: 3px;
+	list-style-type: none;
+	margin: 5px 0 0 0;
+	overflow: auto;
+	padding: 0;
+	width: 350px;
+	height: 215px;
+}
+.check-list li {
+	padding-left: 15px;
+}
+
+
+.iui-checkbox {
+	background-color: transparent;
+	color: black;
+	cursor: default;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	white-space:nowrap;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+.iui-checkbox div /*Compatibility with Bootstrap */
+{
+	-webkit-box-sizing: content-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: content-box;    /* Firefox, other Gecko */
+	box-sizing: content-box; 
+}
+.iui-checkbox-box {
+	display: inline-block;
+	color: black;
+	width: 14px;
+	height: 14px;
+	vertical-align: top; margin:1px 3px 0 0;
+	position: relative;
+}
+.iui-checkbox-box-disabled {
+	border: thin solid #cecece;
+	color: #cecece !important;
+}
+.iui-checkbox-content {
+	display: inline-block;
+	margin: 0;
+	padding: 0 5px;
+	white-space: normal;
+}
+.iui-checkbox-content-disabled {
+	color: #cecece;
+}
+
+
+.iui-treeview {
+	/*cursor: default;*/
+	overflow: hidden;
+	position: relative;	
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+}
+.iui-treeview div /*Compatibility with Bootstrap */
+{
+	-webkit-box-sizing: content-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: content-box;    /* Firefox, other Gecko */
+	box-sizing: content-box; 
+}
+.iui-treeview-rtl {
+	direction: rtl;
+}
+.iui-treeview-block, .iui-treeview-block-top, .iui-treeview-block-bottom {
+	margin: 0;
+	overflow: hidden;
+	padding: 0 1px; /*1px;*/
+	position: absolute;
+	left: 2px;
+}
+.iui-treeview-block {
+	top: 1px;
+}
+.iui-treeview-block-top {
+	background: white;
+	top: 0;
+	border-bottom: thin solid #dedede;
+	z-index: 2;
+}
+.iui-treeview-block-bottom {
+	background: white;
+	bottom: 0;
+	border-top: thin solid #dedede;
+	z-index: 1;
+}
+.iui-treeview-block-rtl {
+	direction: rtl;
+}
+.iui-treeview-block-shift-left
+{
+	/*margin-left: 16px !important;*/
+	padding-left: 15px;
+}
+.iui-treeview-block-shift-right {
+	margin-right: 16px;
+}
+.iui-treeview-item-block {
+	padding: 0 0 0 15px;
+}
+.iui-treeview-item-block-rtl {
+	padding: 0 15px 0 0;
+}
+.iui-treeview-item, .iui-treeview-item-fixed {
+	display: block;
+	list-style-type: none;
+	margin: 5px 0;
+	padding: 0;
+	white-space: nowrap;
+}
+.iui-treeview-item-fixed {
+	background: #efefef;
+}
+.iui-treeview-item-fixed .iui-treeview-item-content:focus {
+	outline: none !important;
+	border: thin dotted transparent;
+}
+.iui-treeview-item-content {
+	border-radius: 3px; padding-left: 20px;
+	margin: 0;
+	vertical-align: middle; position: relative;
+}
+.iui-treeview-item-content::before {
+	position: absolute; left: 0; top:2px; content: "";
+	width: 16px; height: 15px;
+	background: url('../../assets/images/folder.png') left top no-repeat;
+}
+.iui-treeview-expand-box
+{
+	/*background: url(../resources/empty.png) no-repeat 0 0;*/
+	display: inline-block;
+	position: relative;
+	width: 16px;
+	height: 16px;
+	vertical-align: middle;
+	z-index: 1;
+	cursor: pointer;
+}
+.iui-treeview-expand-box-load {
+	background: url(../../assets/images/load.gif) no-repeat 0 0;
+}
+.iui-treeview-expand-box-open {
+	background: url(../../assets/images/expand.png) no-repeat 0 0;
+}
+.iui-treeview-expand-box-open-disabled {
+	background: url(../../assets/images/expand-disabled.png) no-repeat 0 0;
+}
+.iui-treeview-expand-box-close {
+	background: url(../../assets/images/collapse.png) no-repeat 0 0;
+}
+.iui-treeview-expand-box-close {
+	background: url('../../assets/images/collapse.png') left top no-repeat;
+}
+
+
+.iui-treeview-expand-box-close-disabled {
+	background: url(../../assets/images/collapse-disabled.png) no-repeat 0 0;
+}
+.iui-treeview-expand-box-open-rtl {
+	background: url(../../assets/images/expand-rtl.png) no-repeat 0 0;
+}
+.iui-treeview-expand-box-open-rtl-disabled {
+	background: url(../../assets/images/expand-rtl-disabled.png) no-repeat 0 0;
+}
+.iui-treeview-expand-box-close-rtl {
+	background: url(../../assets/images/collapse-rtl.png) no-repeat 0 0;
+}
+.iui-treeview-expand-box-close-rtl-disabled {
+	background: url(../../assets/images/collapse-rtl-disabled.png) no-repeat 0 0;
+}
+.iui-treeview-status-icon {
+	position: absolute;
+	left: 0px;
+}
+.iui-treeview-line {
+	display: block;
+	position: absolute;
+	border-left: thin dotted gray;
+	border-top: thin dotted gray;
+	z-index:0
+}
+
+
+
+
+

@@ -1,0 +1,19 @@
+
+
+.table-resize {
+	.table-header {
+		ul {
+			background: $grey4;
+			li {
+				padding:7px 8px;
+			}
+		}
+	}
+	.table-content {
+		ul {		
+			&:nth-child(even) {
+				background: $grey4;
+			}
+		}
+	}
+}
