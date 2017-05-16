@@ -176,8 +176,15 @@ echo '
                         	<input type="file" id="upload_file_input" style="display:none;" accept="image/*">
 							<button class="btn-md btn-skyblue" onClick="document.getElementById('upload_file_input').click();" title="Add New Media"> <span class="glyphicon glyphicon-cloud-upload"></span></button>
 							<button class="btn-md btn-skyblue bulk-select" title="Bulk Select"><span class="glyphicon glyphicon-check"></span></button>
-							<button class="btn-md btn-skyblue imp-fb" title="Import from Facebook"> Facebook </button>
+							<button class="btn-md btn-skyblue local-view" title="Show Manager Images"> Manager </button>
+                            <button class="btn-md btn-skyblue imp-fb" title="Import from Facebook"> Facebook </button>
 							<button class="btn-md btn-skyblue img-insta" title="Import from Instagram"> Instagram </button>
+                            <hr>
+                            <button type="button" class="btn btn-default" style="display:none;" id="fb-action-back"><span class="glyphicon glyphicon-arrow-left"></span></button>
+                            <select style="display:none;" id="fr-fb-accounts-list"><option value="me">My Account</option></select>
+							<button style="display:none;" class="btn btn-danger" id="del_selected_images" title="Delete Selected Media"><span class="glyphicon glyphicon-remove"></span></button>
+                            <button style="display:none;" class="btn btn-primary" id="fb-import-btn" title="Import Selected Media">Import</button>
+                            
 						</div>
 					</div>				
 					<div class="media-upload-item">		
@@ -368,10 +375,6 @@ echo '
 }
 </style>
                         <ul class="img_cont" id="fb-images-ul">
-							<li><img src="../uploads/a5dcc89c3be1903b69a571e786fdcc342cd69209.jpg"><div>Name (12)</div></li>
-							<li><img src="../uploads/a5dcc89c3be1903b69a571e786fdcc342cd69209.jpg"><div>&nbsp;</div></li>
-							<li><img src="../froala_editor1/img/fb-album-icon.png"><div>&nbsp;</div></li>
-							<li><img src="../uploads/a5dcc89c3be1903b69a571e786fdcc342cd69209.jpg"></li>
 						</ul>
 					</div>
 
@@ -675,7 +678,7 @@ var MediaManager = function(){
 }
 
 MediaManager.prototype.getImages = function(){
-	loader(this.IMGCONT);
+	$(document).trigger('ImageManager.activateMM');
 	$.get('api/load_images.php','folder='+this.cPath,function (data){
 		d = JSON.parse(data);
 		if(d.status=='success'){ iself.loadImage(d.data); }else{ console.log('Error: '.d.message); }
@@ -686,7 +689,7 @@ MediaManager.prototype.loadImage = function(d){
 	var html=html2='',s;
 	for(i=0;i<d.length;i++){
 		s = d[i]; active = (i==0)?'active':'';
-		html+='<li data-toggle="modal" data-target="#mediaModal" data-id="#mediaModal'+i+'"><a href="#mediaGallery" class="media-product-img"><img src="'+s.url+'" alt="'+s.name+'"><span class="check-wrapper"><input id="media-check'+i+'" class="checkbox" type="checkbox"><label for="media-check'+i+'" class="checkbox-label"></label></span></a></li>';
+		html+='<li data-toggle="modal" data-target="#mediaModal" data-id="#mediaModal'+i+'"><a href="#mediaGallery" class="media-product-img"><img src="'+s.url+'" alt="'+s.name+'"><span class="check-wrapper"><input data-src="'+s.url+'" id="media-check'+i+'" class="checkbox local-checkbox" type="checkbox"><label for="media-check'+i+'" class="checkbox-label"></label></span></a></li>';
 		
 		html2 +='<div class="item row '+active+'" id="mediaModal'+i+'"><div class="col-sm-5 media-detail-img"><img src="'+s.url+'" alt="item3"></div><div class="col-sm-7"><div class="media-img-deatail"><div class="form-row"><span>File Type : </span> '+s.filetype+'</div><div class="form-row"><span>Uploaded On : </span> '+s.uploaded+'</div><div class="form-row"><span>File Name : </span> '+s.name+'</div><div class="form-row"><span>File Size : </span> '+s.filesize+'</div><div class="form-row"><span>Dimension : </span> '+s.dimension+'</div></div><div class="media-form"><div class="form-row"><span class="label">Url</span><div class="form-item"><a href="'+s.url+'">'+s.url+'</a></div></div></div><div class="media-footer"><div class="form-row"><div class="form-item"><button class="btn-md btn-skyblue del_btn" data-url="'+s.url+'">Delete</button></div></div></div></div></div>';
 	}
@@ -782,6 +785,27 @@ MediaManager.prototype.uploadFile = function(){
 	
 	
 }
+MediaManager.prototype.deleteBulk = function(){
+	var toDelList=[];
+	$('input.local-checkbox:checked').each(function(index, element) {
+		toDelList.push($(element).attr('data-src'));
+	});
+	MM.deleteBulk(toDelList);
+	
+	var dataToSend = 'links='+JSON.stringify(s);
+	$.ajax({
+		type:"POST",
+		url:"api/delete_api.php?bulk_delete=true",
+		data:dataToSend,
+		success: function(data){
+			var d = JSON.parse(data);
+			console.log(d);
+		},
+		error: function(){
+			console.log('Error: while deleting');
+		}
+	});
+}
 
 MediaManager.prototype.deleteFile = function(src,el){
 	$.get('api/delete_api.php?type=file&src='+src,function(data){ $('.close').click(); $(el).remove(); $('[data-id="'+el+'"]').remove(); });
@@ -791,7 +815,7 @@ MediaManager.prototype.deleteFile = function(src,el){
 var MM;
 $(document).ready(function(e) {
     MM =  new MediaManager();
-	//MM.getImages();
+	MM.getImages();
 	//MM.getFolders();
 	$(document).on('click','li[data-target]',function(){
 		var id = $(this).attr('data-id');
@@ -800,6 +824,18 @@ $(document).ready(function(e) {
 		return false;
 	});
 	
+	$(document).on('ImageManager.activateMM',function(){
+		window.ActiveTab='local';
+		$('.img_cont,#fr-fb-accounts-list,#fb-import-btn,#del_selected_images').hide();
+		$('#fb-action-back').hide();
+		$('#mm-images-ul').html('').show();
+		loader('#mm-images-ul');
+		//MM.getImages();
+	});
+	
+	$('.local-view').click(function(){
+		MM.getImages();
+	});
 	
 	$('#upload_file_input').change(function(event){
 		MM.uploadFile();
@@ -811,10 +847,21 @@ $(document).ready(function(e) {
 		}
 	});
 	
+	$('#del_selected_images').click(function(){
+		if($('input.local-checkbox:checked').length>0){
+			if(confirm('Are you sure to delete?')){
+				MM.deleteBulk();
+			}
+		}else{
+			console.log('Warning: No Item Selected');
+		}
+	});
+	
+	
 });
 
 </script>
-<script type="text/javascript" src="sdk/fb-insta-sdk.js"></script>
+<script type="text/javascript" src="sdk/fb-insta-sdk.js?v=<?php echo time(); ?>"></script>
 
 </body>
 </html>

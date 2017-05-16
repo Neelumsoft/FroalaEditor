@@ -55,11 +55,26 @@ FbObj.prototype.preResponse = function (r){
 	return this.al;
 }
 
-FbObj.prototype.showAlbums = function (r){
+FbObj.prototype.showAlbums = function (){
 	$('.img_cont').hide();
-	var html='';
+	$('#fb-action-back').hide();
+	var html='', r=this.al;
 	for(i=0;i<r.length;i++){
-		html += '<li data-type="'+r[i].subType+'" data-url="'+r[i].url+'"><img src="'+r[i].thumb+'"><div>'+r[i].name+'</div></li>';
+		//html += '<li data-type="'+r[i].subType+'" data-url="'+r[i].url+'"><img src="'+r[i].thumb+'"><div>'+r[i].name+'</div></li>';
+		html+='<li data-type="'+r[i].subType+'" data-url="'+r[i].url+'"><a href="javascript:void(0);" class="media-product-img"><img src="'+r[i].thumb+'" alt="'+r[i].name+'"></a><div>'+r[i].name+'</div></li>';
+	}
+	$('#fb-images-ul').html(html);
+	
+	$('#fb-images-ul').show();
+}
+
+FbObj.prototype.showAlbumPics = function (id){
+	var html='';
+	$('#fb-action-back').show();
+	var r = this.ai[id];
+	for(i=0;i<r.length;i++){
+		//html += '<li data-type="'+r[i].subType+'" data-url="'+r[i].url+'" data-name="'+r[i].name+'"><img src="'+r[i].url+'"></li>';
+		html+='<li data-id="#mediaModal'+i+'" data-type="'+r[i].subType+'" data-url="'+r[i].url+'" data-name="'+r[i].name+'"><a href="javascript:void(0);" class="media-product-img"><img src="'+r[i].url+'" alt="'+r[i].name+'"><span class="check-wrapper"><input id="fb-media-check'+i+'" class="checkbox fb-checkbox" type="checkbox"><label for="fb-media-check'+i+'" class="checkbox-label"></label></span></a></li>';
 	}
 	$('#fb-images-ul').html(html);
 	
@@ -133,7 +148,7 @@ FbObj.prototype.getFromPage = function(pid){
 
 //save pics to local storage 
 FbObj.prototype.savePics = function (){
-	console.log(JSON.stringify(this.toSubmit));
+	//console.log(JSON.stringify(this.toSubmit));
 	$.ajax({
 		url: this.aurl,
 		type:"POST",
@@ -145,7 +160,7 @@ FbObj.prototype.savePics = function (){
 		},
 		success: function(da){
 			//console.log(da);
-			$(document).trigger('ImageManager.OpenFacebookImages');
+			MM.getImages();
 			$('#fb-import-btn').text('Images Imported Successfully').delay(200).text('Import');
 		},
 		error:function(){
@@ -193,8 +208,6 @@ IGObj.prototype._login = function (){
 
 IGObj.prototype.getAccessToken = function (){
 	$.get(this.aju,'access_token',function(response){
-		//alert('access token response');
-		//console.log(response);
 		r = JSON.parse(response);
 		if(r.status=='success'){
 			IGself.getUserMedia();
@@ -204,11 +217,7 @@ IGObj.prototype.getAccessToken = function (){
 	});
 }
 IGObj.prototype.getUserMedia = function (){
-	window.B.show();
-	window.C.find(".fr-list-column").empty();
-	$.get(this.aju,'user_media=true&u'+encodeURIComponent(location.href),function(response){
-		//alert('user media response');
-		//console.log(response);
+	$.get(this.aju,'user_media=true&u'+encodeURIComponent(location.href+'/media-manager'),function(response){
 		r = JSON.parse(response);
 		if(r.status=='error'){
 			switch(r.code){
@@ -243,7 +252,7 @@ IGObj.prototype.savePics = function (){
 		},
 		success: function(da){
 			//console.log(da);
-			$(document).trigger('ImageManager.OpenFacebookImages');
+			MM.getImages();
 			$('#fb-import-btn').text('Images Imported Successfully').delay(200).text('Import');
 		},
 		error:function(){
@@ -251,6 +260,17 @@ IGObj.prototype.savePics = function (){
 			$('#fb-import-btn').text('Problem in Saving Images').delay(200).text('Import');
 		}
 	});
+}
+
+IGObj.prototype.showPics = function (r){
+	var html='';
+	for(i=0;i<r.length;i++){
+		//html += '<li data-type="'+r[i].subType+'" data-url="'+r[i].url+'" data-name="'+r[i].name+'"><img src="'+r[i].url+'"></li>';
+		html+='<li data-id="#mediaModal'+i+'" data-type="'+r[i].subType+'" data-url="'+r[i].url+'" data-name="'+r[i].name+'"><a href="javascript:void(0);" class="media-product-img"><img src="'+r[i].thumb+'" alt="'+r[i].name+'"><span class="check-wrapper"><input id="fb-media-check'+i+'" class="checkbox fb-checkbox" type="checkbox"><label for="fb-media-check'+i+'" class="checkbox-label"></label></span></a></li>';
+	}
+	$('#fb-images-ul').html(html);
+	
+	$('#fb-images-ul').show();
 }
 
 
@@ -265,10 +285,12 @@ function IGinit(){
 $(document).ready(function(e) {
     
 	$(document).on('click','.imp-fb',function(){
-		$(document).trigger('ImageManager.activeFB');
+		$(document).trigger('ImageManager.activateFB');
 		if(typeof _FB != 'undefined'){
-			_FB.currentFB=$(this).val();
+			_FB.currentFB=$('#fr-fb-accounts-list').val();
+			_FB.getPages();
 			_FB.getAlbumsData();
+			
 		}else{
 			FBinit();
 		}
@@ -282,41 +304,49 @@ $(document).ready(function(e) {
 		}
 	});
 	
-	$(document).on('ImageManager.activeFB',function(event,r){
+	$(document).on('ImageManager.activateFB',function(event,r){
 		$('.img_cont').hide();
+		window.ActiveTab='fb';
+		$('#del_selected_images,#fb-import-btn').hide();
 		$('#fb-images-ul').html('').show();
 		loader('#fb-images-ul');
 	});
 	
-	$(document).on('ImageManager.LoadInstaImages',function(event,r){
-		//console.log('--------------------');
-		//console.log(r);
-		if(typeof _IG != 'undefined'){
-			//console.log('IG: Load Event triggered successfully');
-			window.atlist=r;gN(r);
-		}else{
-			console.log('_IG Not Defined.');
-		}
+	
+	
+	$(document).on('click','[data-type="fb-folder"]',function(){
+		_FB.showAlbumPics($(this).attr('data-url'));
 	});
 	
-	$(document).on('change','#fr-fb-accounts-list',function(){
-		if(typeof _FB != 'undefined'){
-			_FB.currentFB=$(this).val();
-			_FB.getAlbumsData();
+	
+	$('#fb-action-back').click(function(){
+		_FB.showAlbums();
+	});
+	window.st_bul_sel=false;
+	$('.bulk-select').click(function(){
+		if(!window.st_bul_sel){
+			$('.checkbox').attr('checked',true);
+			$('#del_selected_images').show();
+			window.st_bul_sel = true;
+			$('#mm-images-ul li').removeAttr('data-target');
+			if(window.ActiveTab=='fb'){$('#fb-import-btn').show();}
 		}else{
-			FBinit();
+			$('.checkbox').attr('checked',false);
+			$('#del_selected_images').hide();
+			window.st_bul_sel = false;
+			$('#mm-images-ul li').removeAttr('data-target','#mediaModal');
+			$('#mm-images-ul li').removeAttr('data-target','#mediaModal');
+			if(window.ActiveTab=='fb'){$('#fb-import-btn').hide();}
 		}
 	});
 	
 	$(document).on('click','#fb-import-btn',function(){
-		if($('.fr-fb-selected').length>0){
-			var Obj2 = new Array();
-			var sd = new Array();
-			$('.fr-fb-selected').each(function(index, element) {
+		if($('input.fb-checkbox:checked').length>0){
+			$('input.fb-checkbox:checked').each(function(index, element) {
 				if(window.ActiveTab=='fb'){
-					_FB.toSubmit[index] = {url: btoa($(element).find('img[data-url]').attr('data-url')),name: btoa($(element).find('img[data-url]').attr('data-name')+'.jpg')};
+					_FB.toSubmit[index] = {url: btoa($(element).closest('li').attr('data-url')),name: btoa($(element).closest('li').attr('data-name')+'.jpg')};
 				}else{
-					_IG.toSubmit[index] = {url: btoa($(element).find('img[data-url]').attr('data-url')),name: btoa($(element).find('img[data-url]').attr('data-name')+'.jpg')};
+					_IG.toSubmit[index] = {url: btoa($(element).closest('li').attr('data-url')),name: btoa($(element).closest('li').attr('data-name')+'.jpg')};
 				}
 			});
 			if(window.ActiveTab=='fb'){_FB.savePics();}else{_IG.savePics();}
@@ -326,53 +356,36 @@ $(document).ready(function(e) {
 		}
 	});
 	
-	//Images Check all images fb
-	$(document).on('imageManager.checkAll',function (event,xys){
-		window.checkActive=true;
-		if(window.ActiveTab!='local'){
-			$('.fr-image-list .fr-image-container[data-type=image]').addClass('fr-fb-selected');
+	
+	
+	
+/**** InstaGram Payments ******/
+
+
+	
+	$(document).on('click','.img-insta',function(){
+		$(document).trigger('ImageManager.activateIG');
+		if(typeof _IG != 'undefined'){
+			_IG.getUserMedia();
 		}else{
-			
-			$('.fr-image-list .fr-image-container[data-type="folder"] .fr-open-folder').attr('data-subtype','fb-image').removeClass('fa-folder-open').addClass('fa-check-circle');
-			$('.fr-image-list .fr-image-container[data-type] i.fr-delete-img').addClass('fr-disabled');
-			$('.fr-image-list .fr-image-container[data-type="image"] .fr-insert-img').attr('data-subtype','fb-image').removeClass('fa-plus').addClass('fa-check-circle');
-			
-			$('.fr-image-list .fr-image-container[data-type]').addClass('fr-fb-selected');
+			IGinit();
 		}
-		
-		if($('.fr-image-list .fr-image-container.fr-fb-selected').length>0 && window.ActiveTab!='local'){$('#fb-import-btn').show();}else{$('#fr-del-selected-local').show();}
-		$(xys).addClass('fa-check-circle').removeClass('fa-circle');
-	});
-	$(document).on('imageManager.unCheckAll',function (event,xys){
-		window.checkActive=false;
-		if(window.ActiveTab!='local'){
-			$('.fr-image-list .fr-image-container[data-type=image]').removeClass('fr-fb-selected');
-			$('#fb-import-btn').hide();
-		}else{
-			
-			$('.fr-image-list .fr-image-container[data-type="folder"] .fr-open-folder').attr('data-subtype','folder').removeClass('fa-check-circle').addClass('fa-folder-open');
-			$('.fr-image-list .fr-image-container[data-type] i.fr-delete-img').removeClass('fr-disabled');
-			$('.fr-image-list .fr-image-container[data-type="image"] .fr-insert-img').attr('data-subtype','image').removeClass('fa-check-circle').addClass('fa-plus');
-			
-			$('.fr-image-list .fr-image-container[data-type]').removeClass('fr-fb-selected');
-			$('#fr-del-selected-local').hide();
-		}
-		
-		$(xys).removeClass('fa-check-circle').addClass('fa-circle');
 	});
 	
-	$(document).on('click',"#fr-check-all-btn",function(){
-		//if(window.ActiveTab=='local') return false;
-		if($(this).hasClass('fa-circle')){
-			//hCheck(this);
-			$(document).trigger('imageManager.checkAll',[this]);
+	$(document).on('ImageManager.activateIG',function(event,r){
+		$('.img_cont').hide();
+		window.ActiveTab='insta';
+		$('#del_selected_images,#fb-import-btn').hide();
+		$('#fb-images-ul').html('').show();
+		loader('#fb-images-ul');
+	});
+	
+	$(document).on('ImageManager.LoadInstaImages',function(event,r){
+		if(typeof _IG != 'undefined'){
+			_IG.showPics(r);
 		}else{
-			//hUnCheck(this);
-			$(document).trigger('imageManager.unCheckAll',[this]);
+			console.log('_IG Not Defined.');
 		}
-		/*$('.fr-image-list .fr-image-container[data-type=image]').each(function(index, element) {
-                $(element).find('.fr-open-folder').trigger('click');
-         });*/
 	});
 
 });

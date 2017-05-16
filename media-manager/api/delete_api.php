@@ -3,8 +3,8 @@
 // Array of image objects to return.
 $response = array();
 
-function delete() {
-    $filePath = $_SERVER['DOCUMENT_ROOT'].$_GET['src'];
+function delete($link) {
+    $filePath = $_SERVER['DOCUMENT_ROOT'].$link;
     // Check if file exists.
     if (file_exists($filePath)) {
       // Delete file.
@@ -33,9 +33,17 @@ function deleteDir($dirPath){
 
 
 if(isset($_GET['type']) && $_GET['type']=='file' && isset($_GET['src'])){
-	if(!empty($_GET['src'])){delete();}
+	if(!empty($_GET['src'])){delete($_GET['src']);}
 }if(isset($_GET['type']) && $_GET['type']=='folder' && isset($_GET['dir'])){
 	if(!empty($_GET['dir'])){deleteDir();}
+}elseif(isset($_GET['bulk_delete']) && isset($_POST['links'])){
+	$files = json_decode($_POST['links']);
+	foreach($files as $file){
+		if(!empty($file)){
+			delete($file);
+		}
+	}
+  $response = array('status'=>'success','message'=>'images deleted successfully');
 }else{
   $response = array('status'=>'error','message'=>'error occured while fetching images.');
 }
