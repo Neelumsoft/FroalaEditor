@@ -138,12 +138,13 @@ class DiskManagement {
 	* @return array
 	*/
   public static function newFolder($path,$name) {
-		$response = array();		
-		$s = 'New-Folder-';$i=1;
-		while(is_dir($_SERVER['DOCUMENT_ROOT'].$path.$s.$i)){
-			$i++;
+		$response = array();	
+		if(is_dir($_SERVER['DOCUMENT_ROOT'].$path.$name)){	
+			$s = $name;
+			$i=1;
+			while(is_dir($_SERVER['DOCUMENT_ROOT'].$path.$s.$i)){ $i++; }
+			$name = $s.$i;
 		}
-		$name = $s.$i;
 		
 	  if(mkdir($_SERVER['DOCUMENT_ROOT'].$path.$name,0755)){
 			$response = array("name" => $name,"type"=>"folder","url"=>$path.$name,"thumb"=>"froala_editor1/img/folder-icon-2.png",'datetime'=>time(),'subtype'=>'folder');

@@ -11,11 +11,8 @@ function delete($link) {
       return unlink($filePath);
     }
     return true;
-  }
+}
 function deleteDir($dirPath){
-	if (!is_dir($dirPath)) {
-		//throw new InvalidArgumentException("$dirPath must be a directory");
-	}
 	if (substr($dirPath, strlen($dirPath) - 1, 1) != '/') {
 		$dirPath .= '/';
 	}
@@ -31,12 +28,21 @@ function deleteDir($dirPath){
 	rmdir($dirPath);
 }
 
-
-if(isset($_GET['type']) && $_GET['type']=='file' && isset($_GET['src'])){
-	if(!empty($_GET['src'])){delete($_GET['src']);}
-}if(isset($_GET['type']) && $_GET['type']=='folder' && isset($_GET['dir'])){
-	if(!empty($_GET['dir'])){deleteDir();}
-}elseif(isset($_GET['bulk_delete']) && isset($_POST['links'])){
+if(isset($_POST['type']) && $_POST['type']=='file' && isset($_POST['src'])){
+	if(!empty($_POST['src'])){
+		if(delete($_POST['src'])){
+			$response = array('status'=>'success','message'=>'image deleted successfully');
+		}else{
+			$response = array('status'=>'error','message'=>'Problem in deleting file');
+		}
+	}else{
+		$response = array('status'=>'error','message'=>'Source Invalid');
+	}
+	
+}elseif(isset($_POST['type']) && $_POST['type']=='folder' && isset($_POST['dir'])){
+	if(!empty($_POST['dir'])){deleteDir($_SERVER['DOCUMENT_ROOT'].$_POST['dir']);}
+	$response = array('status'=>'success','message'=>'Folder deleted successfully');
+}elseif(isset($_POST['bulk_delete']) && isset($_POST['links'])){
 	$files = json_decode($_POST['links']);
 	foreach($files as $file){
 		if(!empty($file)){
@@ -45,7 +51,7 @@ if(isset($_GET['type']) && $_GET['type']=='file' && isset($_GET['src'])){
 	}
   $response = array('status'=>'success','message'=>'images deleted successfully');
 }else{
-  $response = array('status'=>'error','message'=>'error occured while fetching images.');
+  $response = array('status'=>'error','message'=>'error occured while deleting images.');
 }
 
 echo json_encode($response);

@@ -12,18 +12,22 @@ function getUserFolder(){
 	return $path;
 }
 ?>
+
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Media Manager</title>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<title>Media Manager</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 <?php
+/*
+<link rel="stylesheet" type="text/css" href="css/file-upload.css" /> 
+*/
+
 echo '
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css" /> 
 	<link rel="stylesheet" type="text/css" href="css/global.css" /> 
 	<link rel="stylesheet" type="text/css" href="css/select.css" /> 
-	<link rel="stylesheet" type="text/css" href="css/file-upload.css" /> 
 	<link rel="stylesheet" type="text/css" href="css/style.css" /> 
 	<!--[if IE]>
   <link rel="stylesheet" type="text/css" href="css/ie.css" />
@@ -31,328 +35,36 @@ echo '
 ';
 ?>
 <style type="text/css">
-.glyphicon{
-	color:#000000 !important;
+#media_manager_footer{
+	display:block;
+	margin-top:15px;
+	padding-top:5px;
+	border-top:#E7E7E7 solid 1px;
 }
-</style>
-</head>
-<body>
-<script type="text/javascript">
-//Facebook SDK
-(function(d, s, id){
- var js, fjs = d.getElementsByTagName(s)[0];
- if (d.getElementById(id)) {return;}
- js = d.createElement(s); js.id = id;
- js.src = "//connect.facebook.net/en_US/sdk.js";
- fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-</script>
-<!-- Header Section Start -->
+#media_manager_footer ul.pagination{
+	list-style:none;
+	margin:0;
+	padding:0;
+}
 
+#media_manager_footer ul.pagination li{
+	display:inline-block;
+	background-color:#F0F0F0;
+	padding:5px;
+	margin:1px;
+	height:30px;
+	width:30px;
+}
+#media_manager_footer ul.pagination li:hover{
+	cursor:pointer;
+}
+#media_manager_footer ul.pagination li.active{
+	background-color:#D4D4D4;
+}
 
-<!-- Content section start -->
-<div class="content-wrapper">
-<!-- Left Sidebar start -->
-
-
-
-	<!-- Content start here -->
-	<section class="content sidebar-content">
-
-		<div class="content-mid">
-			<div class="content-midleft">
-				<h2 class="seller-heading"><span>Media Library</span></h2>
-				<div class="root-box-top">
-					<div class="root-menu-heading">
-						<ul>
-							<li><a href="javascript:void(0)" class="root-listitem">
-									<span class="foldericon-root"> <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="22px" viewBox="0 0 14.5 11.5" enable-background="new 0 0 14.5 11.5" xml:space="preserve">
-													<g><path fill="#F9FFD9" stroke="#707171" stroke-width="0.5" stroke-miterlimit="10" d="M4.6,2.775h8.583
-													c0.59,0,1.068,0.479,1.068,1.066v6.34c0,0.59-0.479,1.068-1.068,1.068H1.317c-0.591,0-1.067-0.479-1.067-1.068V1.316
-													c0-0.59,0.477-1.066,1.067-1.066h2.464L4.6,2.775z"/>
-													<path fill="#FFFFFF" stroke="#707171" stroke-width="0.5" stroke-miterlimit="10" d="M12.983,2.775V2.027
-													c0-0.588-0.479-1.066-1.068-1.066H4.011L4.6,2.775h8.084H12.983z"/>
-													</g></svg>													
-													</span>
-									<span class="ficon-txt"> Add Root Category</span></a>
-								<ul>
-									<li><a href="javascript:void(0)">
-										<span class="foldericon-root"><svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="24px" height="22px" viewBox="0 0 14.5 11.5" enable-background="new 0 0 14.5 11.5" xml:space="preserve"><g>	<path fill="#DDE8E8" stroke="#707171" stroke-width="0.5" stroke-miterlimit="10" d="M4.6,2.775h8.583	c0.59,0,1.068,0.479,1.068,1.066v6.34c0,0.59-0.479,1.068-1.068,1.068H1.318c-0.592,0-1.068-0.479-1.068-1.068V1.316 c0-0.588,0.477-1.066,1.068-1.066h2.463L4.6,2.775z"/>	<path fill="#FFFFFF" stroke="#707171" stroke-width="0.5" stroke-miterlimit="10" d="M12.983,2.775V2.029		c0-0.59-0.479-1.066-1.068-1.066H4.012L4.6,2.775h8.084H12.983z"/></g></svg></span>
-										<span class="ficon-txt"> Add Subcategory</span>
-									</a></li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-				</div>
-				<div class="root-box">
-					<div class="tree">
-				    <ul id="mm-folders-tree-ul">
-			        <li>
-		            <a href="javascript:void(0)"><i class="menuIcon glyphicon glyphicon-minus"></i>
-		           	<i><img src="images/folder.svg" alt=""></i> Default Category</a> 
-		            <ul>
-	                <li>
-	                	<a href="http://google.com"><i class="menuIcon glyphicon glyphicon-minus"></i>
-	                		<i><img src="images/folder.svg" alt=""></i> Root Catagory 001 (8)</a> 
-	                    <ul>
-	                        <li>
-		                       		<a href="javascript:void(0)"><i class="icon-leaf"></i>
-		                       		<i><img src="images/subfolder.svg" alt=""></i> Grand Child</a> 
-	                        </li>
-	                    </ul>
-	                </li>
-	                <li>
-	                	<a href="javascript:void(0)"><i class="menuIcon glyphicon glyphicon-minus"></i>
-												<i><img src="images/folder.svg" alt=""></i> Child
-											</a> 
-	                    <ul>
-	                        <li>
-		                        <a href="javascript:void(0)">
-		                        <i><img src="images/subfolder.svg" alt=""></i> Grand Child</a> 
-	                        </li>
-	                        <li>
-	                        	<a href="javascript:void(0)"><i class="menuIcon glyphicon glyphicon-minus"></i>
-	                        	<i><img src="images/subfolder.svg" alt=""></i> Grand Child</a> 
-	                            <ul>
-	                                <li>
-		                                <a href="javascript:void(0)"><i class="menuIcon glyphicon glyphicon-minus"></i>
-		                                <i><img src="images/subfolder.svg" alt=""></i> Great Grand Child</a> 
-			                            <ul>
-			                                <li>
-				                                <a href="javascript:void(0)">
-				                                <i><img src="images/subfolder.svg" alt=""></i> Great great Grand Child</a> 
-			                                </li>
-			                                <li>
-				                                <a href="javascript:void(0)">
-				                                <i><img src="images/subfolder.svg" alt=""></i> Great great Grand Child</a> 
-			                                </li>
-			                             </ul>
-	                                </li>
-	                                <li>
-		                                <a href="javascript:void(0)">
-		                                <i><img src="images/subfolder.svg" alt=""></i> Great Grand Child</a> 
-	                                </li>
-	                                <li>
-		                                <a href="javascript:void(0)">
-		                                <i><img src="images/subfolder.svg" alt=""></i> Great Grand Child</a> 
-	                                </li>
-	                            </ul>
-	                        </li>
-	                        <li>
-		                        <a href="javascript:void(0)">
-		                        <i><img src="images/subfolder.svg" alt=""></i> Grand Child</a> 
-	                        </li>
-	                    </ul>
-	                </li>
-		            </ul>
-			        </li>
-			        <li>
-			          <a href="javascript:void(0)"><i class="menuIcon glyphicon glyphicon-minus"></i>
-			          <i><img src="images/folder.svg" alt=""></i> Parent2</a> 
-			          <ul>
-			            <li>
-			              <a href="javascript:void(0)">
-			              <i><img src="images/subfolder.svg" alt=""></i> Child</a> 
-					        </li>
-					    	</ul>
-			        </li>
-				    </ul>
-					</div>
-				</div>
-			</div>
-			<div class="content-midright">
-				<button class="btn-skyblue btn-md pull-right">Remove Category</button>
-				<div class="media-box">
-					<div class="media-header">		
-						<div class="media-list-view">
-							<!--<span class="media-category-name">Categories Name (10 / 20)</span>-->
-							<div class="pull-right view-list-icon">
-								<span class="glyphicon glyphicon-th-list list-view"></span>
-								<span class="glyphicon glyphicon-th-large grid-view"></span>
-							</div>
-						</div>
-						<div class="media-btn-group clearfix">
-                        	<input type="file" id="upload_file_input" style="display:none;" accept="image/*">
-							<button class="btn-md btn-skyblue" onClick="document.getElementById('upload_file_input').click();" title="Add New Media"> <span class="glyphicon glyphicon-cloud-upload"></span></button>
-							<button class="btn-md btn-skyblue bulk-select" title="Bulk Select"><span class="glyphicon glyphicon-check"></span></button>
-							<button class="btn-md btn-skyblue local-view" title="Show Manager Images"> Manager </button>
-                            <button class="btn-md btn-skyblue imp-fb" title="Import from Facebook"> Facebook </button>
-							<button class="btn-md btn-skyblue img-insta" title="Import from Instagram"> Instagram </button>
-                            <hr>
-                            <button type="button" class="btn btn-default" style="display:none;" id="fb-action-back"><span class="glyphicon glyphicon-arrow-left"></span></button>
-                            <select style="display:none;" id="fr-fb-accounts-list"><option value="me">My Account</option></select>
-							<button style="display:none;" class="btn btn-danger" id="del_selected_images" title="Delete Selected Media"><span class="glyphicon glyphicon-remove"></span></button>
-                            <button style="display:none;" class="btn btn-primary" id="fb-import-btn" title="Import Selected Media">Import</button>
-                            
-						</div>
-					</div>				
-					<div class="media-upload-item">		
-						<ul class="media-list-item img_cont" id="mm-images-ul">
-							<?php /*?><li data-toggle="modal" data-target="#mediaModal">
-								<a href="#mediaGallery" class="media-product-img">
-									<img src="images/media/media-img.jpg" alt="">
-									<span class="check-wrapper">
-										<input id="media-check1" class="checkbox" type="checkbox" checked="checked">
-										<label for="media-check1" class="checkbox-label"></label>
-									</span>
-								</a>
-							</li>
-							<li data-toggle="modal" data-target="#mediaModal">
-								<a href="#mediaGallery" class="media-product-img">
-									<img src="images/media/media-img2.jpg" alt="">
-									<span class="check-wrapper">
-										<input id="media-check2" class="checkbox" type="checkbox" checked="checked">
-										<label for="media-check2" class="checkbox-label"></label>
-									</span>
-								</a>
-							</li>
-							<li data-toggle="modal" data-target="#mediaModal">
-								<a href="#mediaGallery" class="media-product-img">
-									<img src="images/media/media-img3.jpg" alt="">
-									<span class="check-wrapper">
-										<input id="media-check3" class="checkbox" type="checkbox" checked="checked">
-										<label for="media-check3" class="checkbox-label"></label>
-									</span>
-								</a>
-							</li>
-							<li data-toggle="modal" data-target="#mediaModal">
-								<a href="#mediaGallery" class="media-product-img">
-									<img src="images/media/media-img4.jpg" alt="">
-									<span class="check-wrapper">
-										<input id="media-check4" class="checkbox" type="checkbox">
-										<label for="media-check4" class="checkbox-label"></label>
-									</span>
-								</a>
-							</li>
-							<li data-toggle="modal" data-target="#mediaModal">
-								<a href="#mediaGallery" class="media-product-img">
-									<img src="images/media/media-img5.jpg" alt="">
-									<span class="check-wrapper">
-										<input id="media-check5" class="checkbox" type="checkbox">
-										<label for="media-check5" class="checkbox-label"></label>
-									</span>
-								</a>
-							</li>
-							<li data-toggle="modal" data-target="#mediaModal">
-								<a href="#mediaGallery" class="media-product-img">
-									<img src="images/media/media-img6.jpg" alt="">
-									<span class="check-wrapper">
-										<input id="media-check6" class="checkbox" type="checkbox">
-										<label for="media-check6" class="checkbox-label"></label>
-									</span>
-								</a>
-							</li>
-							<li data-toggle="modal" data-target="#mediaModal">
-								<a href="#mediaGallery" class="media-product-img">
-									<img src="images/media/media-img7.jpg" alt="">
-									<span class="check-wrapper">
-										<input id="media-check7" class="checkbox" type="checkbox">
-										<label for="media-check7" class="checkbox-label"></label>
-									</span>
-								</a>
-							</li>
-							<li data-toggle="modal" data-target="#mediaModal">
-								<a href="#mediaGallery" class="media-product-img">
-									<img src="images/media/media-img8.jpg" alt="">
-									<span class="check-wrapper">
-										<input id="media-check8" class="checkbox" type="checkbox">
-										<label for="media-check8" class="checkbox-label"></label>
-									</span>
-								</a>
-							</li>
-							<li data-toggle="modal" data-target="#mediaModal">
-								<a href="#mediaGallery" class="media-product-img">
-									<img src="images/media/media-img9.jpg" alt="">
-									<span class="check-wrapper">
-										<input id="media-check9" class="checkbox" type="checkbox">
-										<label for="media-check9" class="checkbox-label"></label>
-									</span>
-								</a>
-							</li>
-							<li data-toggle="modal" data-target="#mediaModal">
-								<a href="#mediaGallery" class="media-product-img">
-									<img src="images/media/media-img.jpg" alt="">
-									<span class="check-wrapper">
-										<input id="media-check10" class="checkbox" type="checkbox">
-										<label for="media-check10" class="checkbox-label"></label>
-									</span>
-								</a>
-							</li>
-							<li data-toggle="modal" data-target="#mediaModal">
-								<a href="#mediaGallery" class="media-product-img">
-									<img src="images/media/media-img2.jpg" alt="">
-									<span class="check-wrapper">
-										<input id="media-check11" class="checkbox" type="checkbox">
-										<label for="media-check11" class="checkbox-label"></label>
-									</span>
-								</a>
-							</li>
-							<li data-toggle="modal" data-target="#mediaModal">
-								<a href="#mediaGallery" class="media-product-img">
-									<img src="images/media/media-img3.jpg" alt="">
-									<span class="check-wrapper">
-										<input id="media-check12" class="checkbox" type="checkbox">
-										<label for="media-check12" class="checkbox-label"></label>
-									</span>
-								</a>
-							</li>
-							<li data-toggle="modal" data-target="#mediaModal">
-								<a href="#mediaGallery" class="media-product-img">
-									<img src="images/media/media-img4.jpg" alt="">
-									<span class="check-wrapper">
-										<input id="media-check13" class="checkbox" type="checkbox">
-										<label for="media-check13" class="checkbox-label"></label>
-									</span>
-								</a>
-							</li>
-							<li data-toggle="modal" data-target="#mediaModal">
-								<a href="#mediaGallery" class="media-product-img">
-									<img src="images/media/media-img5.jpg" alt="">
-									<span class="check-wrapper">
-										<input id="media-check14" class="checkbox" type="checkbox">
-										<label for="media-check14" class="checkbox-label"></label>
-									</span>
-								</a>
-							</li>
-							<li data-toggle="modal" data-target="#mediaModal">
-								<a href="#mediaGallery" class="media-product-img">
-									<img src="images/media/media-img6.jpg" alt="">
-									<span class="check-wrapper">
-										<input id="media-check15" class="checkbox" type="checkbox">
-										<label for="media-check15" class="checkbox-label"></label>
-									</span>
-								</a>
-							</li>
-							<li data-toggle="modal" data-target="#mediaModal">
-								<a href="#mediaGallery" class="media-product-img">
-									<img src="images/media/media-img7.jpg" alt="">
-									<span class="check-wrapper">
-										<input id="media-check16" class="checkbox" type="checkbox">
-										<label for="media-check16" class="checkbox-label"></label>
-									</span>
-								</a>
-							</li>
-							<li data-toggle="modal" data-target="#mediaModal">
-								<a href="#mediaGallery" class="media-product-img">
-									<img src="images/media/media-img8.jpg" alt="">
-									<span class="check-wrapper">
-										<input id="media-check17" class="checkbox" type="checkbox">
-										<label for="media-check17" class="checkbox-label"></label>
-									</span>
-								</a>
-							</li>
-							<li data-toggle="modal" data-target="#mediaModal">
-								<a href="#mediaGallery" class="media-product-img">
-									<img src="images/media/media-img9.jpg" alt="">
-									<span class="check-wrapper">
-										<input id="media-check18" class="checkbox" type="checkbox">
-										<label for="media-check18" class="checkbox-label"></label>
-									</span>
-								</a>
-							</li><?php */?>
-						</ul>
-<style>
+.glyphicon {
+	color: #000000 !important;
+}
 #fb-images-ul{
 	list-style:none;
 	padding:0;
@@ -373,320 +85,227 @@ echo '
 #fb-images-ul li img:hover{
 	cursor:pointer;
 }
+.mm-loader{
+	width:100px;
+}
+.current-tp-open{
+	color:#1F549B;
+	font-weight:bolder;
+}
 </style>
-                        <ul class="img_cont" id="fb-images-ul">
-						</ul>
-					</div>
+</head>
+<body>
+<script type="text/javascript">
+//Facebook SDK
+(function(d, s, id){
+ var js, fjs = d.getElementsByTagName(s)[0];
+ if (d.getElementById(id)) {return;}
+ js = d.createElement(s); js.id = id;
+ js.src = "//connect.facebook.net/en_US/sdk.js";
+ fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+</script> 
+<!-- Header Section Start --> 
 
-				</div>
-			</div>
-		</div>
-
-		<!-- help section start -->
-		<div class="help-content visible-lg">
-			<h3><span class="question-icon">?</span> Help</h3>
-			<div class="help-row">
-				<h3>Product Details</h3>
-				<p>Specify what category this product  falls under in your product catalogue. </p>
-				<p><span class="example"> EXAMPLE </span> Men's T-Shirts, Women's Accessories, Sports Shoes. Specify what category this product falls under in your product catalogue.</p>
-			</div>
-			<div class="help-row">
-				<h3>Product Advance Setting</h3>
-				<p>Specify what category this product falls under in your product catalogue. </p>
-				<p><span class="example"> EXAMPLE </span> Men's T-Shirts, Women's Accessories, Sports Shoes. Specify what category this product falls under in your product catalogue.</p>
-			</div>
-		</div> 
-		<!-- help section end -->
-
-		<div class="push-content"></div>
-	</section>
+<!-- Content section start -->
+<div class="content-wrapper"> 
+  <!-- Left Sidebar start --> 
+<style>
+ul#mm-folders-tree-ul li ul{
+	display:none;
+}
+</style>
+  <!-- Content start here -->
+  <section class="content sidebar-content">
+    <div class="content-mid">
+      <div class="content-midleft">
+        <h2 class="seller-heading"><span>Media Library</span></h2>
+        <div class="root-box-top">
+          <div class="root-menu-heading">
+            <button type="button" class="btn btn-success" id="create-new-folder" title="Add New Folder"><span class="glyphicon glyphicon-plus"></span></button>
+            <button type="button" style="background-color:#FBD7D8;" class="btn btn-danger" id="delete-current-folder" title="Remove Current Folder"><span class="glyphicon glyphicon-remove"></span></button>
+            <button type="button" class="btn btn-danger" id="rename-current-folder" title="Rename Current Folder"><span class="glyphicon glyphicon-pencil"></span></button>
+          </div>
+        </div>
+        <div class="root-box">
+          <div class="tree" id="mm-folder-tree">
+            <ul id="mm-folders-tree-ul"></ul>
+          </div>
+        </div>
+      </div>
+      <div class="content-midright">
+        <div class="media-box">
+          <div class="media-header">
+            <div class="media-list-view"> 
+              <!--<span class="media-category-name">Categories Name (10 / 20)</span>-->
+              <div class="pull-right view-list-icon"> <span class="glyphicon glyphicon-th-list list-view"></span> <span class="glyphicon glyphicon-th-large grid-view"></span> </div>
+            </div>
+            <div class="media-btn-group clearfix">
+              <input type="file" id="upload_file_input" style="display:none;" accept="image/*">
+              <button class="btn-md btn-skyblue" id="mm-upload-btn" onClick="document.getElementById('upload_file_input').click();" title="Add New Media"> <span class="glyphicon glyphicon-cloud-upload"></span></button>
+              <button class="btn-md btn-skyblue bulk-select" title="Bulk Select"><span class="glyphicon glyphicon-check"></span></button>
+              <button class="btn-md btn-skyblue local-view" title="Open Home"> <span class="glyphicon glyphicon-home"></span> </button>
+              <button class="btn-md btn-skyblue imp-fb" title="Import from Facebook"> Facebook </button>
+              <button class="btn-md btn-skyblue img-insta" title="Import from Instagram"> Instagram </button>
+              <div>
+                  <hr>
+                  <select title="Sort By" id="mm-page-sort"><option value="name-asc">Name ASC</option><option value="name-desc">Name DESC</option><option value="date-asc">Date ASC</option><option value="date-desc">Date DESC</option></select>
+                  <select title="Images/Page" id="mm-images-per-page"><option value="10">10</option><option value="25">25</option><option value="50">50</option></select>
+                  <button type="button" class="btn btn-default" style="display:none;" id="fb-action-back"><span class="glyphicon glyphicon-arrow-left"></span></button>
+                  <select style="display:none;" id="fr-fb-accounts-list">
+                    <option value="me">My Account</option>
+                  </select>
+                  <button style="display:none; background-color:#FBD7D8;" class="btn btn-danger" id="del_selected_images" title="Delete Selected Media"><span class="glyphicon glyphicon-remove"></span></button>
+                  <button style="display:none;" class="btn btn-primary" id="fb-import-btn" title="Import Selected Media">Import</button>
+                  <button style="display:none; color:#191919;" class="btn btn-primary" id="check_uncheck_btn" data-status="0" title="Check All/Uncheck All">Check All</button>
+              </div>
+                <ol class="breadcrumb">
+                    
+                </ol>
+            </div>
+          </div>
+          <div class="media-upload-item">
+            <ul class="media-list-item img_cont" id="mm-images-ul"></ul>
+            <ul class="img_cont" id="fb-images-ul"></ul>
+          </div>
+          <div id="media_manager_footer">
+          	
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    
+    <!-- help section start -->
+    <div class="help-content visible-lg">
+      <h3><span class="question-icon">?</span> Help</h3>
+      <div class="help-row">
+        <h3>Product Details</h3>
+        <p>Specify what category this product  falls under in your product catalogue. </p>
+        <p><span class="example"> EXAMPLE </span> Men's T-Shirts, Women's Accessories, Sports Shoes. Specify what category this product falls under in your product catalogue.</p>
+      </div>
+      <div class="help-row">
+        <h3>Product Advance Setting</h3>
+        <p>Specify what category this product falls under in your product catalogue. </p>
+        <p><span class="example"> EXAMPLE </span> Men's T-Shirts, Women's Accessories, Sports Shoes. Specify what category this product falls under in your product catalogue.</p>
+      </div>
+    </div>
+    <!-- help section end -->
+    
+    <div class="push-content"></div>
+  </section>
 </div>
 
-<!-- Content end -->
+<!-- Content end --> 
 
 <!--begin modal window-->
 <div class="modal media-modal" id="mediaModal">
-	<div class="modal-dialog modal-lg">
-		<div class="modal-content">
-			<div class="modal-header">
-				<div class="pull-left">Attachment Details</div>
-				<button type="button" class="close" data-dismiss="modal" title="Close"> <span class="icon-remove"></span></button>
-			</div>
-			<div class="modal-body">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="pull-left">Attachment Details</div>
+        <button type="button" class="close" data-dismiss="modal" title="Close"> <span class="icon-remove"></span></button>
+      </div>
+      <div class="modal-body"> 
+        
+        <!--begin carousel-->
+        <div id="myGallery" class="carousel slide" data-interval="false">
+          <div class="carousel-inner"></div>
+          <!--Begin Previous and Next buttons--> 
+          <a class="left carousel-control" href="#myGallery" role="button" data-slide="prev"> <span class="icon-arrow-left2"> <span class="path1"></span><span class="path2"></span><span class="path3"></span> </span> </a> <a class="right carousel-control" href="#myGallery" role="button" data-slide="next"> <span class="icon-arrow-right2"> <span class="path1"></span><span class="path2"></span><span class="path3"></span> </span> </a> </div>
+        <!--end carousel--> 
+      </div>
+      <!--end modal-body--> 
+    </div>
+    <!--end modal-content--> 
+  </div>
+  <!--end modal-dialoge--> 
+</div>
+<!--end myModal--> 
 
-				<!--begin carousel-->
-				<div id="myGallery" class="carousel slide" data-interval="false">
-					<div class="carousel-inner">
-						
-                        <?php /*?>
-                        <div class="item row active"> 
-							<div class="col-sm-5 media-detail-img">
-								<img src="images/media/popup-large.jpg" alt="item0">
-							</div>
-							<div class="col-sm-7">
-								<div class="media-img-deatail">
-									<div class="form-row">
-										<span>File Type : </span> Photo001.Jpg
-									</div>
-									<div class="form-row">
-										<span>Uploaded On : </span> Image/Jpg
-									</div>
-									<div class="form-row">
-										<span>File Name : </span> Aug 26 2016
-									</div>
-									<div class="form-row">
-										<span>File Size : </span> 500 kb
-									</div>
-									<div class="form-row">
-										<span>Dimension : </span> 300x400
-									</div>
-								</div>
-								<div class="media-form">
-									<div class="form-row">
-										<span class="label">Url</span>
-										<div class="form-item">
-											<a href="https://www.pinterest.com/pin/140244975875642">https://www.pinterest.com/pin/140244975875642</a>
-										</div>
-									</div>
-									<div class="form-row">
-										<span class="label">Title</span>
-										<div class="form-item">
-											<input type="text" placeholder="IMG 2">
-										</div>
-									</div>
-									<div class="form-row">
-										<span class="label">Caption</span>
-										<div class="form-item">
-											<textarea></textarea>
-										</div>
-									</div>
-									<div class="form-row">
-										<span class="label">Alt Text</span>
-										<div class="form-item">
-											<input type="text">
-										</div>
-									</div>
-									<div class="form-row">
-										<span class="label">Description</span>
-										<div class="form-item">
-											<textarea></textarea>
-										</div>
-									</div>
-									<div class="form-row">
-										<span class="label">Uploaded By</span>
-										<div class="form-item">
-											<span class="upload-name">Seller 1</span>
-										</div>
-									</div>
-								</div>
-								<div class="media-footer">
-									<div class="form-row">
-										<span class="label">Delete Permanently</span>
-										<div class="form-item">
-											<button class="btn-md btn-skyblue">Update</button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="item row"> 
-							<div class="col-sm-5 media-detail-img">
-								<img src="http://lorempixel.com/600/400/nature/4" alt="item3">
-							</div>
-							<div class="col-sm-7">
-								<div class="media-img-deatail">
-									<div class="form-row">
-										<span>File Type : </span> Photo001.Jpg
-									</div>
-									<div class="form-row">
-										<span>Uploaded On : </span> Image/Jpg
-									</div>
-									<div class="form-row">
-										<span>File Name : </span> Aug 26 2016
-									</div>
-									<div class="form-row">
-										<span>File Size : </span> 500 kb
-									</div>
-									<div class="form-row">
-										<span>Dimension : </span> 300x400
-									</div>
-								</div>
-								<div class="media-form">
-									<div class="form-row">
-										<span class="label">Url</span>
-										<div class="form-item">
-											<a href="https://www.pinterest.com/pin/140244975875642">https://www.pinterest.com/pin/140244975875642</a>
-										</div>
-									</div>
-									<div class="form-row">
-										<span class="label">Title</span>
-										<div class="form-item">
-											<input type="text" placeholder="IMG 2">
-										</div>
-									</div>
-									<div class="form-row">
-										<span class="label">Caption</span>
-										<div class="form-item">
-											<textarea></textarea>
-										</div>
-									</div>
-									<div class="form-row">
-										<span class="label">Alt Text</span>
-										<div class="form-item">
-											<input type="text">
-										</div>
-									</div>
-									<div class="form-row">
-										<span class="label">Description</span>
-										<div class="form-item">
-											<textarea></textarea>
-										</div>
-									</div>
-									<div class="form-row">
-										<span class="label">Uploaded By</span>
-										<div class="form-item">
-											<span class="upload-name">Seller 1</span>
-										</div>
-									</div>
-								</div>
-								<div class="media-footer">
-									<div class="form-row">
-										<span class="label">Delete Permanently</span>
-										<div class="form-item">
-											<button class="btn-md btn-skyblue">Update</button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="item row"> 
-							<div class="col-sm-5 media-detail-img">
-								<img src="http://lorempixel.com/600/400/nature/4" alt="item3">
-							</div>
-							<div class="col-sm-7">
-								<div class="media-img-deatail">
-									<div class="form-row">
-										<span>File Type : </span> Photo001.Jpg
-									</div>
-									<div class="form-row">
-										<span>Uploaded On : </span> Image/Jpg
-									</div>
-									<div class="form-row">
-										<span>File Name : </span> Aug 26 2016
-									</div>
-									<div class="form-row">
-										<span>File Size : </span> 500 kb
-									</div>
-									<div class="form-row">
-										<span>Dimension : </span> 300x400
-									</div>
-								</div>
-                                
-								<div class="media-form">
-									<div class="form-row">
-										<span class="label">Url</span>
-										<div class="form-item">
-											<a href="https://www.pinterest.com/pin/140244975875642">https://www.pinterest.com/pin/140244975875642</a>
-										</div>
-									</div>
-									<div class="form-row">
-										<span class="label">Title</span>
-										<div class="form-item">
-											<input type="text" placeholder="IMG 2">
-										</div>
-									</div>
-									<div class="form-row">
-										<span class="label">Caption</span>
-										<div class="form-item">
-											<textarea></textarea>
-										</div>
-									</div>
-									<div class="form-row">
-										<span class="label">Alt Text</span>
-										<div class="form-item">
-											<input type="text">
-										</div>
-									</div>
-									<div class="form-row">
-										<span class="label">Description</span>
-										<div class="form-item">
-											<textarea></textarea>
-										</div>
-									</div>
-									<div class="form-row">
-										<span class="label">Uploaded By</span>
-										<div class="form-item">
-											<span class="upload-name">Seller 1</span>
-										</div>
-									</div>
-								</div>
-								
-                                <div class="media-footer">
-									<div class="form-row">
-										<span class="label">Delete Permanently</span>
-										<div class="form-item">
-											<button class="btn-md btn-skyblue">Update</button>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<?php */?>
-                        
-						<!--end carousel-inner--></div>
-						<!--Begin Previous and Next buttons-->
-						<a class="left carousel-control" href="#myGallery" role="button" data-slide="prev"> 
-							<span class="icon-arrow-left2">
-                <span class="path1"></span><span class="path2"></span><span class="path3"></span>
-              </span>
-            </a> 
-            <a class="right carousel-control" href="#myGallery" role="button" data-slide="next"> 
-            	<span class="icon-arrow-right2">
-              	<span class="path1"></span><span class="path2"></span><span class="path3"></span>
-              </span>
-            </a>
-				</div><!--end carousel-->
-			</div><!--end modal-body-->
-		</div><!--end modal-content-->
-	</div><!--end modal-dialoge-->
-</div><!--end myModal-->
 
-<?php echo '
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<?php
+/*
 <script type="text/javascript" src="js/jquery.dd.min.js"></script>
 <script type="text/javascript" src="js/chosen.jquery.min.js"></script>
+*/
+
+echo '
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/custom.js"></script>
 <script type="text/javascript" src="js/seller-custom.js"></script>
 '; ?>
-
-<style type="text/css">
-.mm-loader{
-	height:50px;
-	width:100px;
-}
-</style>
-
 <script type="text/javascript">
+
 function loader(x){
 	$(x).html('<li><img src="/froala_editor1/img/loader.gif" class="mm-loader"></li>');
 }
 var uPath = '<?php echo $user_folder; ?>',iself;
 window.userFolderDefaultPath = uPath;
+window.currentPath = uPath;
+window.imgPerPage=10;
+
+
 var MediaManager = function(){
 	this.IMGCONT = '#mm-images-ul',this.FolderTree='#mm-folders-tree-ul',this.galleryCONT='#myGallery .carousel-inner',this.cPath=uPath,iself=this;
 }
 
+MediaManager.prototype.getFolderName = function(){
+	var thisDirFolders = [];
+	folders = $('.current-tp-open').closest('ul').find('> li').each(function(index, element) {
+        thisDirFolders.push($(element).find('.tp-open').attr('data-name'));
+    });
+	var name = '';
+	do{
+		name = prompt("Type New Folder Name:\nPath: "+window.currentPath,name);
+	}while(name.length < 1 || $.inArray( name, thisDirFolders ) > -1);
+	return (name==null)? false:name;
+}
+
+MediaManager.prototype.newFolder = function(){
+	//loader(this.FolderTree);
+	
+	name = this.getFolderName();
+	if(!name || name.length==0 || name == -1){return false;}
+	$.post('/new_folder.php','path='+window.currentPath+'&name='+name,function (data){
+		iself.getFolders();
+		iself.getImages();
+		//iself.appendFolder(JSON.parse(data));
+	});
+}
+
+MediaManager.prototype.appendFolder = function(d){
+	var st = '<li> <a href="javascript:void(0)"> <span class="icon-leaf"></span> <i><img src="images/folder.svg" alt=""></i> <i class="tp-open" data-name="'+d.name+'"> ' + d.name +'</i></a></li>';
+	if($('.current-tp-open').find(' > ul').length>0){
+		$('.current-tp-open > ul').append(st);
+	}else{
+		iself.getFolders();
+	}
+}
+
+MediaManager.prototype.renameFolder = function(path,oldName,newName){
+	$.post('/new_folder.php','path='+path+'&renameFolder=true&oldName='+oldName+'&newName='+newName,function (data){
+		d = JSON.parse(data);
+		if(d.status=='success'){ $('.current-tp-open').attr('data-name',newName).text(newName); }else{ console.log('Error: '+d.message); }
+	});
+}
+
 MediaManager.prototype.getImages = function(){
 	$(document).trigger('ImageManager.activateMM');
-	$.get('api/load_images.php','folder='+this.cPath,function (data){
+	$.post('api/load_images.php','folder='+window.currentPath,function (data){
 		d = JSON.parse(data);
-		if(d.status=='success'){ iself.loadImage(d.data); }else{ console.log('Error: '.d.message); }
+		if(d.status=='success'){ /*iself.loadImage(d.data);*/ processPagination(sortArr(d.data)); iself.getBreadCrumb(); }else{ console.log('Error: '.d.message); }
 	});
 }
 
 MediaManager.prototype.loadImage = function(d){
 	var html=html2='',s;
+	if(d.length==0){
+		$(iself.IMGCONT).html('<li>Empty Folder.</li>');
+		$(iself.galleryCONT).html('');
+		return false;
+	}
 	for(i=0;i<d.length;i++){
 		s = d[i]; active = (i==0)?'active':'';
 		html+='<li data-toggle="modal" data-target="#mediaModal" data-id="#mediaModal'+i+'"><a href="#mediaGallery" class="media-product-img"><img src="'+s.url+'" alt="'+s.name+'"><span class="check-wrapper"><input data-src="'+s.url+'" id="media-check'+i+'" class="checkbox local-checkbox" type="checkbox"><label for="media-check'+i+'" class="checkbox-label"></label></span></a></li>';
@@ -696,90 +315,124 @@ MediaManager.prototype.loadImage = function(d){
 	$(iself.IMGCONT).html(html);
 	$(iself.galleryCONT).html(html2);
 }
+
 MediaManager.prototype.getFolders = function(){
-	this.loader(this.IMGCONT);
-	$.get('api/load_folders.php','folder='+this.cPath,function (data){
+	loader(this.FolderTree);
+	$.post('api/load_folders.php','folder='+this.cPath,function (data){
 		iself.loadFolders(data);
 	});
 }
 
+MediaManager.prototype.getFolderTree2 = function(c){
+	if(c.length==0){return '';};
+	var out = '<ul>';
+	for(var key in c){
+		ch = iself.getFolderTree2(c[key]);
+		cha = (ch.length>0)?'<i class="menuIcon glyphicon glyphicon-plus"></i>':'<span class="icon-leaf"></span>';
+		out += '<li data-name="'+key+'"> <a href="javascript:void(0)">'+cha+' <i><img src="images/folder.svg" alt=""></i> <i class="tp-open" data-name="'+key+'"> ' + key +'</i></a>';
+		 out += ch;
+		out += '</li>';
+	}
+	out+= '</ul>';
+	return out;
+}
+MediaManager.prototype.getFolderTree = function(c){
+	var out = '<li class="parent-li"> <a href="javascript:void(0)"> <span class="icon-leaf"></i> <i><img src="images/folder.svg" alt=""></i> <i class="tp-open current-tp-open" data-name=""> Home</i></a></li>';
+	for(var key in c){
+		ch = iself.getFolderTree2(c[key]);
+		cha = (ch.length>0)?'<i class="menuIcon glyphicon glyphicon-plus"></i>':'<span class="icon-leaf"></i>';
+		out += '<li class="parent-li" data-name="'+key+'"> <a href="javascript:void(0)">'+cha+' <i><img src="images/folder.svg" alt=""></i> <i class="tp-open" data-name="'+key+'"> ' + key +'</i></a>';
+		 out += ch;
+		out += '</li>';
+	}
+	return out;
+}
+
 MediaManager.prototype.loadFolders = function(r){
-	var html='',s,d = JSON.parse(r);
-	if(d.status=='success'){
-		return false;
-		for(i=0;i<d.data.length;i++){
-			s = d.data[i];
-			
-			html+='<li data-toggle="modal"><a href="#mediaGallery" data-type="folder" data-uploaded-on="12-23-2010" data-name="filename" data-size="23kb" data-dimension="300x233" class="media-product-img"><img src="'+s.url+'" alt="'+s.name+'"><span class="check-wrapper"><input id="media-check18" class="checkbox" type="checkbox"><label for="media-check18" class="checkbox-label"></label></span></a></li>';
-		}
-		$(iself.IMGCONT).html(html);
-		
+	var d = JSON.parse(r);
+	if(d.status == 'success'){
+		shtml = iself.getFolderTree(d.data);
+		window.folderTreeList = shtml;
+		//console.log(shtml);
+		$(iself.FolderTree).html(shtml);
 	}else{
-		console.log('Error: '.d.message);
+		$(iself.FolderTree).html('<li class="parent-li"> <a href="javascript:void(0)"> <span class="icon-leaf"></i> <i><img src="images/folder.svg" alt=""></i> <i class="tp-open current-tp-open" data-name=""> Home</i></a></li>');
+		console.log('Error: '+d.message);
 	}
 }
 
-MediaManager.prototype.uploadFile1 = function(){
-	if (window.FileReader) {
-		// FileReader are supported.
-		var file = document.getElementById('upload_file_input').files[0];
-		
-		var reader = new FileReader();
-		// Handle errors load
-		reader.onload = function(evt){
-			var csv = evt.target.result;
-			alert('loaded');
-			$('body').append('<img src="'+csv+'">');
-		};
-		reader.onerror = function(evt){
-			if(evt.target.error.name == "NotReadableError") {
-				alert("Canno't read file !");
-			}
-		};
-		reader.readAsText(file);
-		
-	} else {
-		alert('FileReader are not supported in this browser.');
-	}
-}
 MediaManager.prototype.appendIMG = function(s){
-
-	var html = '<li data-toggle="modal" data-target="#mediaModal'+i+'"><a href="#mediaGallery" class="media-product-img"><img src="'+s.url+'" alt="'+s.name+'"><span class="check-wrapper"><input id="media-check18" class="checkbox" type="checkbox"><label for="media-check18" class="checkbox-label"></label></span></a></li>';
 	
-	var html2 = '<div class="item row" id="mediaModal'+$(iself.galleryCONT).find('.item').length+'"><div class="col-sm-5 media-detail-img"><img src="'+s.url+'" alt="item3"></div><div class="col-sm-7"><div class="media-img-deatail"><div class="form-row"><span>File Type : </span> '+s.filetype+'</div><div class="form-row"><span>Uploaded On : </span> '+s.uploaded+'</div><div class="form-row"><span>File Name : </span> '+s.name+'</div><div class="form-row"><span>File Size : </span> '+s.filesize+'</div><div class="form-row"><span>Dimension : </span> '+s.dimension+'</div></div><div class="media-form"><div class="form-row"><span class="label">Url</span><div class="form-item"><a href="'+s.url+'">'+s.url+'</a></div></div></div><div class="media-footer"><div class="form-row"><div class="form-item"><button class="btn-md btn-skyblue del_btn" data-url="'+s.url+'">Delete</button></div></div></div></div></div>';
+	sdcount = $(iself.IMGCONT).find('li').length;
+	active='';
+	if(sdcount==0){
+		active = 'active';
+	}
 	
-	$(iself.IMGCONT).prepend(html);
+	html = '<li data-toggle="modal" data-target="#mediaModal" data-id="#mediaModal'+sdcount+'"><a href="#mediaGallery" class="media-product-img"><img src="'+s.url+'" alt="'+s.name+'"><span class="check-wrapper"><input data-src="'+s.url+'" id="media-check'+i+'" class="checkbox local-checkbox" type="checkbox"><label for="media-check'+i+'" class="checkbox-label"></label></span></a></li>';
+		
+	html2 = '<div class="item row '+active+'" id="mediaModal'+sdcount+'"><div class="col-sm-5 media-detail-img"><img src="'+s.url+'" alt="item3"></div><div class="col-sm-7"><div class="media-img-deatail"><div class="form-row"><span>File Type : </span> '+s.filetype+'</div><div class="form-row"><span>Uploaded On : </span> '+s.uploaded+'</div><div class="form-row"><span>File Name : </span> '+s.name+'</div><div class="form-row"><span>File Size : </span> '+s.filesize+'</div><div class="form-row"><span>Dimension : </span> '+s.dimension+'</div></div><div class="media-form"><div class="form-row"><span class="label">Url</span><div class="form-item"><a href="'+s.url+'">'+s.url+'</a></div></div></div><div class="media-footer"><div class="form-row"><div class="form-item"><button class="btn-md btn-skyblue del_btn" data-url="'+s.url+'">Delete</button></div></div></div></div></div>';
 	
-	$(iself.galleryCONT).prepend(html2);
 	
+	if($(iself.IMGCONT).find('li').length==1 && $(iself.IMGCONT).find('li:first').text()=='Empty Folder.'){
+		$(iself.IMGCONT).html(html);
+	}else{
+		$(iself.IMGCONT).prepend(html);
+	}
+	
+	if($(iself.IMGCONT).find('.item').length==0){
+		$(iself.galleryCONT).html(html2);
+	}else{
+		$(iself.galleryCONT).prepend(html2);
+	}
 }
-MediaManager.prototype.uploadFile = function(){
+
+MediaManager.prototype.getCurrentPath = function(){
+	var s = [];
+	$('.current-tp-open').parents('li').each(function(index, element) {
+		s.push($(element).find('i.tp-open').attr('data-name'));
+	});
+	//s.push($(this).attr('data-name'));
+	s.reverse();
+	if(s.length>0){
+		window.currentPath = uPath+s.join('/')+'/';
+	}
+	return window.currentPath;
+}
+
+MediaManager.prototype.uploadFile = function(element){
 	file = document.getElementById('upload_file_input').files[0];
-	var data = new FormData();
+	var data = new FormData(),old_cont = $(element).html();
     data.append('file', file);
+	data.append('folder',window.currentPath);
+	data.append('upload_file',true);
+	this.getCurrentPath();
 	
 	$.ajax({
-        url: 'api/upload_image.php?upload_file&folder='+this.cPath,
+        url: 'api/upload_image.php',
         type: 'POST',
         data: data,
         cache: false,
         dataType: 'json',
-        processData: false, // Don't process the files
-        contentType: false, // Set content type to false as jQuery will tell the server its a query string request
-        success: function(data, textStatus, jqXHR)
+        processData: false,
+        contentType: false,
+		beforeSend: function(){
+			$(element).html('Uploading...');
+		},
+		success: function(d)
         {
-            d = JSON.parse(data);
 			if(d.status=='success'){
 				iself.appendIMG(d.data);
 			}else{
-				alert(d.message);
+				alert('Error: '+d.message);
+				console.log('Error: '+d.message);
 			}
+			$(element).html(old_cont);
         },
         error: function(jqXHR, textStatus, errorThrown)
         {
-            // Handle errors here
             console.log('ERRORS: ' + textStatus);
-            // STOP LOADING SPINNER
+			$(element).html(old_cont);
         }
     });
 	
@@ -792,10 +445,10 @@ MediaManager.prototype.deleteBulk = function(){
 	});
 	MM.deleteBulk(toDelList);
 	
-	var dataToSend = 'links='+JSON.stringify(s);
+	var dataToSend = 'bulk_delete=true&links='+JSON.stringify(s);
 	$.ajax({
 		type:"POST",
-		url:"api/delete_api.php?bulk_delete=true",
+		url:"api/delete_api.php",
 		data:dataToSend,
 		success: function(data){
 			var d = JSON.parse(data);
@@ -808,15 +461,71 @@ MediaManager.prototype.deleteBulk = function(){
 }
 
 MediaManager.prototype.deleteFile = function(src,el){
-	$.get('api/delete_api.php?type=file&src='+src,function(data){ $('.close').click(); $(el).remove(); $('[data-id="'+el+'"]').remove(); });
+	$.post('api/delete_api.php','type=file&src='+src,function(data){
+		var d = JSON.parse(data);
+		if(d.status=='success'){
+			
+			$(iself.galleryCONT).find('.item.active').remove();
+			$(iself.galleryCONT).find('.item:nth-of-type(1)').addClass('active');
+			$('.close').click();
+			$(iself.IMGCONT).find('img[src="'+src+'"]').closest('li').remove();
+			
+			//$(el).remove();
+			//$('[data-id="'+el+'"]').remove();
+		}else{
+			console.log('Error: '+d.message);
+		}
+	});
 }
+
+MediaManager.prototype.deleteFolder = function(src,el){
+	$.post('api/delete_api.php','type=folder&dir='+src,function(data){
+		var d = JSON.parse(data);
+		if(d.status=='success'){
+			iself.getFolders();
+			window.currentPath = uPath;
+			iself.getImages();
+		}else{
+			console.log('Error: '+d.message);
+		}
+	});
+}
+
+
+MediaManager.prototype.getBreadCrumb = function(src,el){
+	var sArray = window.currentPath.split('/');
+	var fArray = window.currentPath.split('/')
+	fArray.pop();fArray.shift();sArray.shift();sArray.shift();sArray.shift();sArray.pop();
+	var html = '<li><a href="javascript:void(0);" data-name="#home" data-path="/'+fArray[0]+'/'+fArray[1]+'/"><span class="glyphicon glyphicon-home"></span></a></li>';
+
+	var sel = '';
+	for(i=0;i<sArray.length;i++){
+		
+		sel += ' > ul > li[data-name='+sArray[i]+']';
+		
+		if((i+1) != sArray.length){
+			hisPath = '/';
+			for(j=0;j<(i+3);j++){
+				hisPath += fArray[j]+'/';
+			}
+			
+			html += '<li><a href="javascript:void(0);" data-name="'+sArray[i]+'" data-path="'+hisPath+'" data-sel="'+sel+'">'+sArray[i]+'</a></li>';
+		}else{
+			html += '<li class="active">'+sArray[i]+'</li>';
+		}
+	}
+	$('.breadcrumb').html(html);
+}
+
 
 
 var MM;
 $(document).ready(function(e) {
     MM =  new MediaManager();
 	MM.getImages();
-	//MM.getFolders();
+	MM.getFolders();
+	
+	//$(iself.FolderTree).html($(iself.FolderTree).html());
 	$(document).on('click','li[data-target]',function(){
 		var id = $(this).attr('data-id');
 		$(MM.galleryCONT).find('.item').removeClass('active');
@@ -824,8 +533,43 @@ $(document).ready(function(e) {
 		return false;
 	});
 	
+	$('#create-new-folder').click(function(){
+		MM.newFolder();
+	});
+	
+	$(document).on('click','#mm-folders-tree-ul li i.tp-open',function(){
+		var s = [];
+		$('#mm-folders-tree-ul li i.tp-open').removeClass('current-tp-open');
+		$(this).addClass('current-tp-open');
+		
+		$(this).parents('li').each(function(index, element) {
+            s.push($(element).find('i.tp-open').attr('data-name'));
+        });
+		//s.push($(this).attr('data-name'));
+		s.reverse();
+		if(s.length>0){
+		window.currentPath = uPath+s.join('/')+'/';
+		}
+		MM.getImages();
+	});
+	
+	$(document).on('click','.breadcrumb > li > a[data-path]',function(){
+		window.currentPath = $(this).attr('data-path');
+		if($(this).attr('data-name')=='#home'){
+			MM.getFolders();
+		}else{
+			$('#mm-folder-tree '+$(this).attr('data-sel')).find(' > a .tp-open').click();
+		}
+		
+		MM.getImages();
+	});
+	
+	
 	$(document).on('ImageManager.activateMM',function(){
 		window.ActiveTab='local';
+		window.st_bul_sel=false;
+		resetCheckBtn();
+		$('#check_uncheck_btn').hide();
 		$('.img_cont,#fr-fb-accounts-list,#fb-import-btn,#del_selected_images').hide();
 		$('#fb-action-back').hide();
 		$('#mm-images-ul').html('').show();
@@ -838,12 +582,68 @@ $(document).ready(function(e) {
 	});
 	
 	$('#upload_file_input').change(function(event){
-		MM.uploadFile();
+		MM.uploadFile('#mm-upload-btn');
 	});
 	
 	$(document).on('click','.del_btn',function(){
-		if(confirm('Are you sure? to delete the file!')){
-			MM.deleteFile($(this).attr('data-url'),'#'+$(this).closest('.item.row').attr('id'));
+		if(confirm('Are you sure? to delete the file!\nFile: '+$(this).attr('data-url'))){
+			MM.deleteFile($(this).attr('data-url'));
+		}
+	});
+	
+	$(document).on('click','#delete-current-folder',function(){
+		if($('.current-tp-open').attr('data-name').length==0){return false;}else if(confirm('Are you sure to delete the Folder?\nPath: '+window.currentPath)){
+			var s = [];
+			$('#mm-folders-tree-ul li i.tp-open').removeClass('current-tp-open');
+			
+			$(this).parents('li').each(function(index, element) {
+				s.push($(element).find('i.tp-open').attr('data-name'));
+			});
+			//s.push($(this).attr('data-name'));
+			s.reverse();
+			if(s.length>0){
+				window.currentPath = uPath+s.join('/')+'/';
+			}
+			
+			MM.deleteFolder(window.currentPath,'#'+$('.current-tp-open').closest('li'));
+		}
+	});
+	
+	$(document).on('click','#rename-current-folder',function(){
+		if($('.current-tp-open').attr('data-name').length==0 || $('.current-tp-open').attr('data-name')=='Facebook-Images' || $('.current-tp-open').attr('data-name') == 'Instagram-Images'){return false;}else{
+			var oldName = $('.current-tp-open').attr('data-name');
+			var allNames = [];
+			$('.current-tp-open').closest('ul').find('li').each(function(index, element) {
+                allNames.push($(element).find('i.tp-open').attr('data-name'));
+            });
+			
+
+			do{
+				newName = prompt('Enter New Name:\nPath: '+window.currentPath,oldName);
+			}while($.inArray( newName, allNames ) > -1 || (newName == false) || newName.length < 1 );
+
+			if(newName == false || newName == null || newName.length==0){
+			return false;
+			}
+			var s = [];var f=0;
+			$('.current-tp-open').parents('li').each(function(index, element) {
+				if(f!=0){
+					s.push($(element).find('i.tp-open').attr('data-name'));
+				}
+				f++;
+			});
+			//console.log(s);
+			s.reverse();
+			//console.log(s);
+			//s.shift();
+			olPath = uPath;
+			if(s.length>0){
+				olPath += s.join('/')+'/';
+			}
+			//alert('currentPath: '+window.currentPath);
+			//alert('olPath: '+olPath);
+			
+			MM.renameFolder(olPath,oldName,newName);
 		}
 	});
 	
@@ -857,10 +657,137 @@ $(document).ready(function(e) {
 		}
 	});
 	
+	$(document).on('click','.menuIcon',function(){
+		if($(this).closest('li').find(' > ul').css('display')!='none'){
+			$(this).closest('li').find(' > ul').slideUp();
+			$(this).attr('title', 'Expand').addClass('glyphicon-plus').removeClass('glyphicon-minus');
+		}else{
+			$(this).closest('li').find(' > ul').slideDown();
+			$(this).attr('title', 'Expand').addClass('glyphicon-minus').removeClass('glyphicon-plus');
+		}
+	});
+	
+	$(document).on('click','#check_uncheck_btn',function(){
+		if(window.ActiveTab=='fb' && window.fbSt != 1){return false;}
+		if($(this).attr('data-status')==0){
+			//unchecked ==> check all
+			checkAll(this);
+		}else{
+			//checked ==> uncheck all
+			unCheckAll(this);
+		}
+	});
+	
+	$(document).on('click','#media_manager_footer ul.pagination > li',function(){
+		openPage($(this).attr('data-value'));
+	});
+	
+	$('#mm-page-sort').change(function(){
+		processPagination(sortArr(window.unSrtArr));
+	});
+	
+	$('#mm-images-per-page').change(function(){
+		window.imgPerPage=$(this).val();
+		processPagination(window.unSrtArr);
+	});
 	
 });
 
-</script>
+function resetCheckBtn(){
+	$('#check_uncheck_btn').text('Check All').attr('data-status',0);
+}
+
+function checkAll(x){
+	$(x).text('Uncheck All');
+	$(x).attr('data-status',1);
+	$('input.checkbox').attr('checked',true);
+}
+
+function unCheckAll(x){
+	$(x).text('Check All');
+	$(x).attr('data-status',0);
+	$('input.checkbox').attr('checked',false);
+}
+
+
+function srt(s){
+	function cmpr(ss,tt){ss = ss.toUpperCase();tt = tt.toUpperCase();if (ss < tt) {return -1;}if (ss > tt) {return 1;}return 0;}
+	
+	s.sort(function(aa, bb) {
+		//console.log('a.name: '+aa.name+', b.name'+bb.name);
+		//console.log('cmpr: '+typeof cmpr);
+		switch($('#mm-page-sort').val()){
+			case 'name-desc':
+				return cmpr(bb.name,aa.name);
+				break;
+			case 'date-asc':
+				return aa.datetime-bb.datetime;
+				break;
+			case 'date-desc':
+				return bb.datetime-aa.datetime;
+				break;
+			default:
+				return  cmpr(aa.name,bb.name);
+		}
+		
+	});
+	return s;
+}
+
+function sortArr(s){
+	window.unSrtArr = s;
+	var sFiles=[];
+	for(i=0;i<s.length;i++){
+		sFiles.push(s[i]);
+	}
+	return srt(sFiles);
+}
+
+
+function processPagination(a){
+	window.pg_a=a,window.pg_t = a.length;window.pg_tp=Math.ceil(window.pg_t/window.imgPerPage);showPagination(window.pg_tp);
+}
+
+function showPagination(pg_tp){
+	var pg_act,pg_html='<ul class="pagination">';
+	for(i=1;i<=pg_tp;i++){
+		if(i==1){pg_act='active';}else{pg_act='';}
+		pg_html+='<li class="'+pg_act+'" data-value="'+i+'">'+i+'</li>';
+	}
+	pg_html+='</ul>';
+	$('#media_manager_footer').html(pg_html);
+	openPage(1);
+}
+
+function openPage(pg_n){
+	$('#media_manager_footer ul.pagination > li').removeClass('active');
+	$('#media_manager_footer ul.pagination > li[data-value='+pg_n+']').addClass('active');
+	var maxN = (pg_n*window.imgPerPage)-1;
+	var nArr=[],pg_t_mx=(maxN-(window.imgPerPage-1));
+	for(i=pg_t_mx;i<=maxN;i++){if(window.pg_a.indexOf(window.pg_a[i])!=-1) nArr.push(window.pg_a[i]);}
+	//if(window.newCreatedFolders[pg_n].length>0){nArr = nArr.concat(window.newCreatedFolders[pg_n]);}
+	//console.log(nArr);
+	
+	//alert(window.ActiveTab+','+window.fbSt);
+	switch(window.ActiveTab){
+		case 'fb':
+			if(window.fbSt==1){
+				_FB.showAlbumPics(nArr);
+			}else{
+				_FB.showAlbums(nArr);
+			}
+			
+			break;
+		case 'insta':
+			_IG.showPics(nArr);
+			break;
+		default:
+			MM.loadImage(nArr);
+	}
+	
+}
+
+</script> 
 <script type="text/javascript" src="sdk/fb-insta-sdk.js?v=<?php echo time(); ?>"></script>
 
 </body>

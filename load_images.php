@@ -7,7 +7,7 @@ require 'froala_php_sdk/lib/FroalaEditor.php';
 
 // Load the images.
 try {
-  $response = FroalaEditor_Image::getList($_GET['folder']);
+  $response = FroalaEditor_Image::getList($_POST['folder']);
   echo stripslashes(json_encode($response));
 }
 catch (Exception $e) {

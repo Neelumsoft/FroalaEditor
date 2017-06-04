@@ -9,7 +9,13 @@ function checkFolder($x){
 }
 
 function getImages(){
-	return $_POST;
+	$d = array();
+	foreach($_POST as $k=>$v){
+		if($k!='folder' && $k!='type'){
+			$d[$k] = $v;
+		}
+	}
+	return $d;
 }
 function save1($x,$d){
 	foreach($d as $k=>$v){
@@ -26,20 +32,20 @@ function save1($x,$d){
 	return 1;
 }
 
-if(isset($_GET['type']) && $_GET['type']=='ig'){
-	$fb_upload_path = $_SERVER['DOCUMENT_ROOT'].$_GET['folder'].'Instagram-Images/';
+if(isset($_POST['type']) && $_POST['type']=='ig'){
+	$fb_upload_path = $_SERVER['DOCUMENT_ROOT'].$_POST['folder'].'Instagram-Images/';
 }else{
-	$fb_upload_path = $_SERVER['DOCUMENT_ROOT'].$_GET['folder'].'Facebook-Images/';
+	$fb_upload_path = $_SERVER['DOCUMENT_ROOT'].$_POST['folder'].'Facebook-Images/';
 }
 $response = array();
 
-if(is_dir($_SERVER['DOCUMENT_ROOT'].$_GET['folder'])){
+if(is_dir($_SERVER['DOCUMENT_ROOT'].$_POST['folder'])){
 	
 	if(checkFolder($fb_upload_path)){
 		$images = getImages();
 		if(is_array($images) && count($images)>0){
 			$u=$a=$f=0;
-			foreach($images as $img){
+			foreach($images as $sk=>$img){
 				$res = save1($fb_upload_path,$img);
 				switch($res){
 					case 1:

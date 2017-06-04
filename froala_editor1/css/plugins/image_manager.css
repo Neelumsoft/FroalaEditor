@@ -364,3 +364,6 @@ select.dropDown.drp-fb{
 	height:30px;
 	padding-left:10px;
 }
+.fr-delete-img.fr-disabled{
+	display:none !important;
+}

@@ -6,9 +6,9 @@ require 'froala_php_sdk/lib/FroalaEditor.php';
 // Delete the image.
 try {
 	if(isset($_POST['renameFolder'])){
-		$response = FroalaEditor_Image::renameFolder($_GET['path'],$_POST['oldName'],$_POST['newName']);
+		$response = FroalaEditor_Image::renameFolder($_POST['path'],$_POST['oldName'],$_POST['newName']);
 	}else{
-		$response = FroalaEditor_Image::newFolder($_GET['path'],$_POST['name']);
+		$response = FroalaEditor_Image::newFolder($_POST['path'],$_POST['name']);
 	}
   echo stripslashes(json_encode($response));
 }

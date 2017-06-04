@@ -14,7 +14,7 @@ $options = array(
 
 // Store the image.
 try {
-  $response = FroalaEditor_Image::upload($_GET['folder'], $options);
+  $response = FroalaEditor_Image::upload($_POST['folder'], $options);
   echo stripslashes(json_encode($response));
 }
 catch (Exception $e) {

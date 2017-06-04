@@ -2,7 +2,7 @@
 
 //Facebook SDK (Image Import)
 var self,FbObj = function (FB){
-	this.FB = FB,this.aurl='/import-from-facebook.php?folder='+window.userFolderDefaultPath,this.FB_uid='', this.FB_accessToken='',self=this,this.selectedImages=[],this.ai=[],this.al=[],this.currentFB,this.toSubmit={};
+	this.FB = FB,this.aurl='/import-from-facebook.php',this.FB_uid='', this.FB_accessToken='',self=this,this.selectedImages=[],this.ai=[],this.al=[],this.currentFB,this.toSubmit={};
 }
 
 FbObj.prototype.authRequest = function (){
@@ -55,10 +55,11 @@ FbObj.prototype.preResponse = function (r){
 	return this.al;
 }
 
-FbObj.prototype.showAlbums = function (){
+FbObj.prototype.showAlbums = function (r){
+	window.fbSt=0;
 	$('.img_cont').hide();
 	$('#fb-action-back').hide();
-	var html='', r=this.al;
+	var html='';
 	for(i=0;i<r.length;i++){
 		//html += '<li data-type="'+r[i].subType+'" data-url="'+r[i].url+'"><img src="'+r[i].thumb+'"><div>'+r[i].name+'</div></li>';
 		html+='<li data-type="'+r[i].subType+'" data-url="'+r[i].url+'"><a href="javascript:void(0);" class="media-product-img"><img src="'+r[i].thumb+'" alt="'+r[i].name+'"></a><div>'+r[i].name+'</div></li>';
@@ -68,10 +69,10 @@ FbObj.prototype.showAlbums = function (){
 	$('#fb-images-ul').show();
 }
 
-FbObj.prototype.showAlbumPics = function (id){
+FbObj.prototype.showAlbumPics = function (r){
+	window.fbSt=1;
 	var html='';
 	$('#fb-action-back').show();
-	var r = this.ai[id];
 	for(i=0;i<r.length;i++){
 		//html += '<li data-type="'+r[i].subType+'" data-url="'+r[i].url+'" data-name="'+r[i].name+'"><img src="'+r[i].url+'"></li>';
 		html+='<li data-id="#mediaModal'+i+'" data-type="'+r[i].subType+'" data-url="'+r[i].url+'" data-name="'+r[i].name+'"><a href="javascript:void(0);" class="media-product-img"><img src="'+r[i].url+'" alt="'+r[i].name+'"><span class="check-wrapper"><input id="fb-media-check'+i+'" class="checkbox fb-checkbox" type="checkbox"><label for="fb-media-check'+i+'" class="checkbox-label"></label></span></a></li>';
@@ -102,7 +103,8 @@ FbObj.prototype.getAlbumsData = function(i){
 	  'GET',
 	  {"fields":"photo_count,name,created_time,photos.limit(300){created_time,name,images}"},
 	  function(response) {
-		  self.showAlbums(self.preResponse(response.data));
+		  processPagination(sortArr(self.preResponse(response.data)));
+		  //self.showAlbums(self.preResponse(response.data));
 	  }
 	);
 }
@@ -149,6 +151,8 @@ FbObj.prototype.getFromPage = function(pid){
 //save pics to local storage 
 FbObj.prototype.savePics = function (){
 	//console.log(JSON.stringify(this.toSubmit));
+	//this.toSubmit += '&folder='+window.userFolderDefaultPath;
+	this.toSubmit['folder'] = window.userFolderDefaultPath;
 	$.ajax({
 		url: this.aurl,
 		type:"POST",
@@ -161,6 +165,7 @@ FbObj.prototype.savePics = function (){
 		success: function(da){
 			//console.log(da);
 			MM.getImages();
+			MM.getFolders();
 			$('#fb-import-btn').text('Images Imported Successfully').delay(200).text('Import');
 		},
 		error:function(){
@@ -186,7 +191,7 @@ function FBinit(){
 /****************************************IG SDK***********************************/
 //Instagram SDK (Image Import)
 var IGself,IGObj = function (){
-	this.at,this.aju='http://'+location.hostname+'/froala_php_sdk/insta-sdk.php',IGself=this,this.ig_images,this.toSubmit={},this.aurl='/import-from-facebook.php?type=ig&folder='+window.userFolderDefaultPath;
+	this.at,this.aju='http://'+location.hostname+'/froala_php_sdk/insta-sdk.php',IGself=this,this.ig_images,this.toSubmit={},this.aurl='/import-from-facebook.php';
 }
 
 IGObj.prototype.authRequest = function (){
@@ -196,7 +201,7 @@ IGObj.prototype.authRequest = function (){
 
 //prompt for login current user
 IGObj.prototype._login = function (){
-	$.get(this.aju,'clogin',function(response){
+	$.post(this.aju,'clogin=true',function(response){
 		r = JSON.parse(response);
 		if(r.status=='success'){
 			IGself.getAccessToken();
@@ -207,7 +212,7 @@ IGObj.prototype._login = function (){
 }
 
 IGObj.prototype.getAccessToken = function (){
-	$.get(this.aju,'access_token',function(response){
+	$.post(this.aju,'access_token=true',function(response){
 		r = JSON.parse(response);
 		if(r.status=='success'){
 			IGself.getUserMedia();
@@ -217,7 +222,7 @@ IGObj.prototype.getAccessToken = function (){
 	});
 }
 IGObj.prototype.getUserMedia = function (){
-	$.get(this.aju,'user_media=true&u'+encodeURIComponent(location.href+'/media-manager'),function(response){
+	$.post(this.aju,'user_media=true&usd='+encodeURIComponent(location.href),function(response){
 		r = JSON.parse(response);
 		if(r.status=='error'){
 			switch(r.code){
@@ -241,6 +246,9 @@ IGObj.prototype.getUserMedia = function (){
 //save pics to local storage 
 IGObj.prototype.savePics = function (){
 	//console.log(JSON.stringify(this.toSubmit));
+	this.toSubmit['folder'] = window.userFolderDefaultPath;
+	this.toSubmit['type'] = 'ig';
+
 	$.ajax({
 		url: this.aurl,
 		type:"POST",
@@ -253,6 +261,7 @@ IGObj.prototype.savePics = function (){
 		success: function(da){
 			//console.log(da);
 			MM.getImages();
+			MM.getFolders();
 			$('#fb-import-btn').text('Images Imported Successfully').delay(200).text('Import');
 		},
 		error:function(){
@@ -296,17 +305,12 @@ $(document).ready(function(e) {
 		}
 	});
 	
-	$(document).on('ImageManager.LoadFacebookImages',function(event,r){
-		if(typeof _FB != 'undefined' && typeof MM != 'undefined'){
-			MM.loadImage(r);
-		}else{
-			console.log('_FB Not Defined.');
-		}
-	});
-	
 	$(document).on('ImageManager.activateFB',function(event,r){
 		$('.img_cont').hide();
 		window.ActiveTab='fb';
+		window.st_bul_sel=false;
+		resetCheckBtn();
+		$('#check_uncheck_btn').hide();
 		$('#del_selected_images,#fb-import-btn').hide();
 		$('#fb-images-ul').html('').show();
 		loader('#fb-images-ul');
@@ -315,28 +319,41 @@ $(document).ready(function(e) {
 	
 	
 	$(document).on('click','[data-type="fb-folder"]',function(){
-		_FB.showAlbumPics($(this).attr('data-url'));
+		window.fbSt=1;
+		processPagination(sortArr(_FB.ai[$(this).attr('data-url')]));
+		//processPagination(sortArr(_FB.ai[$(this).attr('data-url')]));
 	});
 	
 	
 	$('#fb-action-back').click(function(){
-		_FB.showAlbums();
+		window.fbSt=0;
+		processPagination(sortArr(_FB.al));
+		//_FB.showAlbums();
 	});
 	window.st_bul_sel=false;
 	$('.bulk-select').click(function(){
+		if(window.ActiveTab=='fb' && window.fbSt!=1){return false;}
 		if(!window.st_bul_sel){
-			$('.checkbox').attr('checked',true);
-			$('#del_selected_images').show();
+			$('#check_uncheck_btn').show();
+			//unCheckAll('#check_uncheck_btn');
+			
 			window.st_bul_sel = true;
 			$('#mm-images-ul li').removeAttr('data-target');
-			if(window.ActiveTab=='fb'){$('#fb-import-btn').show();}
+			if(window.ActiveTab=='fb' || window.ActiveTab == 'insta'){ $('#fb-import-btn').show();}else{
+				$('#del_selected_images').show();
+			}
 		}else{
-			$('.checkbox').attr('checked',false);
-			$('#del_selected_images').hide();
+			
+			
+			$('#check_uncheck_btn').hide();
+			//checkAll('#check_uncheck_btn');
+			
 			window.st_bul_sel = false;
 			$('#mm-images-ul li').removeAttr('data-target','#mediaModal');
 			$('#mm-images-ul li').removeAttr('data-target','#mediaModal');
-			if(window.ActiveTab=='fb'){$('#fb-import-btn').hide();}
+			if(window.ActiveTab=='fb' || window.ActiveTab == 'insta'){$('#fb-import-btn').hide();}else{
+				$('#del_selected_images').hide();
+			}
 		}
 	});
 	
@@ -374,7 +391,11 @@ $(document).ready(function(e) {
 	
 	$(document).on('ImageManager.activateIG',function(event,r){
 		$('.img_cont').hide();
+		window.st_bul_sel=false;
+		$('#fr-fb-accounts-list').hide();
 		window.ActiveTab='insta';
+		$('#check_uncheck_btn').hide();
+		resetCheckBtn();
 		$('#del_selected_images,#fb-import-btn').hide();
 		$('#fb-images-ul').html('').show();
 		loader('#fb-images-ul');
@@ -382,7 +403,7 @@ $(document).ready(function(e) {
 	
 	$(document).on('ImageManager.LoadInstaImages',function(event,r){
 		if(typeof _IG != 'undefined'){
-			_IG.showPics(r);
+			processPagination(sortArr(r));
 		}else{
 			console.log('_IG Not Defined.');
 		}

@@ -224,32 +224,21 @@ window.userFolderDefaultPath = '<?php echo $user_folder; ?>';
 $('#edit').froalaEditor({
 	enter: $.FroalaEditor.ENTER_BR,
 	videoInsertButtons: ['videoBack', '|', 'videoByURL', 'videoEmbed',],
+	
 	//Folder Path
 	userFolderDefaultPath: window.userFolderDefaultPath,
 	
 	// Set the image Load URL.
-	imageManagerLoadURL: '/load_images.php?folder='+window.userFolderDefaultPath,
-	
-	// Set the Default Path
-	imageManagerDefaultURL: '/load_images.php?folder='+window.userFolderDefaultPath,
+	imageManagerLoadURL: '/load_images.php',
 	
 	// Set the image delete URL.
-	imageManagerDeleteURL: '/delete_image.php?folder='+window.userFolderDefaultPath,
-
-	// Set the Default image delete URL.
-	imageManagerDefaultDeleteURL: '/delete_image.php?folder='+window.userFolderDefaultPath,
+	imageManagerDeleteURL: '/delete_image.php',
 	
 	// Set the image upload URL.
-    imageUploadURL: '/upload_image.php?folder='+window.userFolderDefaultPath,
-
-	// Set the Default Upload Path
-	imageManagerDefaultUploadURL: '/upload_image.php?folder='+window.userFolderDefaultPath,
+    imageUploadURL: '/upload_image.php',
 
 	// Set the new folder URL.
-    imageManagerNewFolderURL: '/new_folder.php?path='+window.userFolderDefaultPath,
-
-	// Set the default new folder urlURL.
-    imageManagerNewFolderDefaultURL: '/new_folder.php?path='+window.userFolderDefaultPath,
+    imageManagerNewFolderURL: '/new_folder.php',
 	
 })
 

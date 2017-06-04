@@ -1,5 +1,5 @@
 <?php
-$folderPath = $_GET['folder'];
+$folderPath = $_POST['folder'];
 
 // Array of image objects to return.
 $response = array();

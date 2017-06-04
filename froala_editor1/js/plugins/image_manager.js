@@ -13,7 +13,7 @@
 }(function(a) {
     if (a.extend(a.FE.DEFAULTS, {
         imageManagerLoadURL: "https://i.froala.com/load-files",
-        imageManagerLoadMethod: "get",
+        imageManagerLoadMethod: "post",
         imageManagerLoadParams: {},
         imageManagerPreloader: "froala_editor1/img/loader.gif",
         imageManagerDeleteURL: "",
@@ -26,15 +26,9 @@
 		//folder variables
 		userFolderDefaultPath: '',
 		imageManagerFolders: [],
-		imageManagerDefaultURL: "",
 		imageManagerNewFolderURL: "",
-		imageManagerNewFolderDefaultURL: "",
 		imageManagerNewFolderMethod: "post",
-		imageManagerNewFolderParams:{},
-		//Facebook
-		imageManagerFacebookLoadURL:'',
-		imageManagerFacebookLoadMethod:'get',
-		imageManagerFacebookLoadParams:{}
+		imageManagerNewFolderParams:{}
     }),
     a.FE.PLUGINS.imageManager = function(b) {
 		
@@ -45,7 +39,7 @@
 				insta_icon = '<i data-tab="ig" id="fr-modal-insta-images-btn" title="Login with Instagram & Import Images" class="fa fa-instagram fr-tb-item" data-text="true"></i>',
 				drp_list = '<select id="fr-fb-accounts-list" class="dropDown drp-fb "></select>',
 				drp_pg_size = '<div id="fr-h-r-2"><select title="Sort By" id="fr-pg-sort" class="dropDown drp-pg"><option value="name-asc">Name ASC</option><option value="name-desc">Name DESC</option><option value="date-asc">Date ASC</option><option value="date-desc">Date DESC</option></select> <select title="show Images/Page" id="fr-pg-size" class="dropDown drp-pg"><option value="10">10/Page</option><option value="20">20/Page</option><option value="50">50/Page</option></select><div class="btn btn-danger btn-xs" id="fr-del-all" title="Delete All Files and Folders">Delete All</div><div title="Delete Selected Files and Folders" class="btn btn-danger btn-xs" id="fr-del-selected-local" style="display:none;">Delete Selected</div></div>',
-				a = '<div class="fr-modal-head-line"><i class="fa fa-bars fr-modal-more fr-not-available" id="fr-modal-more-' + b.sid + '" title="' + b.language.translate("Tags") + '"></i>'+drp_list+fb_icon+insta_icon+'<i id="fr-modal-local-images-btn" data-tab="local" title="Show Local Images" class="fa fa-picture-o active fr-tb-item" data-text="true"></i><i id="fr-modal-new-folder-btn" title="Create New Folder" class="fa fa-plus" data-text="true"></i><i id="fr-modal-upload-img-btn" title="Upload Image" class="fa fa-upload" data-text="true"></i><i id="fr-modal-back-btn" class="fa fa-arrow-left" style="color:#c7c3c3;" data-text="true"></i></i><i id="fr-modal-forward-btn" class="fa fa-arrow-right" data-text="true"></i><h4 data-text="true">' + b.language.translate("Manage Images") + "</h4>"+drp_pg_size+"</div>";
+				a = '<div class="fr-modal-head-line"><i class="fa fa-bars fr-modal-more fr-not-available" id="fr-modal-more-' + b.sid + '" title="' + b.language.translate("Tags") + '"></i>'+drp_list+fb_icon+insta_icon+'<i id="fr-modal-local-images-btn" data-tab="local" title="Show Local Images" class="fa fa-home active fr-tb-item" data-text="true"></i><i id="fr-modal-new-folder-btn" title="Create New Folder" class="fa fa-plus" data-text="true"></i><i id="fr-modal-upload-img-btn" title="Upload Image" class="fa fa-upload" data-text="true"></i><i id="fr-modal-back-btn" class="fa fa-arrow-left" style="color:#c7c3c3;" data-text="true"></i></i><i id="fr-modal-forward-btn" class="fa fa-arrow-right" data-text="true"></i><h4 data-text="true">' + b.language.translate("Manage Images") + "</h4>"+drp_pg_size+"</div>";
                 a += '<div class="fr-modal-tags" id="fr-modal-tags"></div>';
                 var c = '<img class="fr-preloader" id="fr-preloader" alt="' + b.language.translate("Loading") + '.." src="' + b.opts.imageManagerPreloader + '" style="display: none;">';
 				c += '<div class="fr-image-list" id="fr-image-list"></div>';
@@ -57,12 +51,30 @@
             y.data("current-image", b.image.get()),
             b.modals.show(J),
             B || w(),
-
-
+			
+			b.opts.imageManagerLoadParams['folder'] = b.opts.imageManagerNewFolderParams['path'] = b.opts.imageManagerDeleteParams['folder'] = window.userFolderDefaultPath;
+			console.log(b.opts.imageManagerNewFolderParams['path']);
+			if(b.opts.imageManagerFolders.length>0){
+				b.opts.imageManagerLoadParams['folder'] = b.opts.userFolderDefaultPath+b.opts.imageManagerFolders.join('/')+'/';
+				b.opts.imageManagerNewFolderParams['path'] = b.opts.userFolderDefaultPath+b.opts.imageManagerFolders.join('/')+'/';
+				b.opts.imageManagerDeleteParams['folder'] = b.opts.userFolderDefaultPath+b.opts.imageManagerFolders.join('/')+'/';
+			}
+			
             g()
 			window.B = B,window.C=C,window.ActiveTab='local',window.checkActive=false,window.newCreatedFolders=[];
 			$(document).on('ImageManager.OpenFacebookImages',function(){
-				$(document).trigger('ImageManager.activateTab',['local']);
+				var params = [];
+				if(window.ActiveTab=='fb'){
+					b.opts.imageManagerFolders=[];
+					b.opts.imageManagerLoadParams['folder'] = b.opts.userFolderDefaultPath+'Facebook-Images/';
+					params = ['local','fb'];
+				}else if(window.ActiveTab=='ig'){
+					b.opts.imageManagerFolders=[];
+					b.opts.imageManagerLoadParams['folder'] = b.opts.userFolderDefaultPath+'Instagram-Images/';
+					params = ['local','ig'];
+				}
+				$(document).trigger('ImageManager.activateTab',params);
+				
 				$('i.fr-tb-item').removeClass('active'),$('#fr-modal-local-images-btn').addClass('active');
 				//g();
 			});
@@ -125,19 +137,23 @@
 				}
 			});
 			
-			$(document).on('ImageManager.activateTab',function(event,tab){
+			$(document).on('ImageManager.activateTab',function(event,tab,Home){
 				window.ActiveTab=tab;$('.fr-modal-wrapper i.fr-tb-item').removeClass('active'),$('.fr-modal-wrapper i.fr-tb-item[data-tab='+tab+']').addClass('active');
 				switch(tab){
 					case 'fb':
-						$('#fr-check-all-btn').show();
+						$('#fr-check-all-btn').show(); $('#fr-del-all').hide();
 						$('#fr-modal-new-folder-btn,#fr-modal-upload-img-btn').css('color','#c7c3c3');FBinit();
 						break;
 					case 'ig':
-						$('#fr-check-all-btn').show();
+						$('#fr-check-all-btn').show(); $('#fr-del-all').hide();
 						$('#fr-modal-new-folder-btn,#fr-modal-upload-img-btn').css('color','#c7c3c3');IGinit();
 						break;
 					default:
-						$('#fr-check-all-btn').show();
+						if(typeof Home == 'undefined'){
+							b.opts.imageManagerFolders=[];
+							b.opts.imageManagerLoadParams['folder'] = b.opts.userFolderDefaultPath;
+						}
+						$('#fr-check-all-btn').show(); $('#fr-del-all').show();
 						$('#fr-modal-new-folder-btn,#fr-modal-upload-img-btn').css('color','#222222'); g();
 						$('#fr-fb-accounts-list').html('').hide();
 				}
@@ -181,6 +197,7 @@
 		}
 		
         function g() {
+			
             B.show(),
             C.find(".fr-list-column").empty(),
             b.opts.imageManagerLoadURL ? a.ajax({
@@ -269,9 +286,13 @@
 		function delFiles(dc) {
 			//updating url
 			if(b.opts.imageManagerFolders.length>0){
-			b.opts.imageManagerDeleteURL = b.opts.imageManagerDefaultDeleteURL+b.opts.imageManagerFolders.join('/')+'/';
+			
+			//b.opts.imageManagerDeleteURL = b.opts.imageManagerDefaultDeleteURL+b.opts.imageManagerFolders.join('/')+'/';
+			
+			b.opts.imageManagerDeleteParams['folder'] = b.opts.userFolderDefaultPath+b.opts.imageManagerFolders.join('/')+'/';;
+			
 			}
-			dataToSend = (typeof dc == 'string' && dc == 'deleteAll')? {deleteAll:true} : {deleteSelected:true,data:dc};
+			dataToSend = (typeof dc == 'string' && dc == 'deleteAll')? {deleteAll:true,folder:b.opts.imageManagerDeleteParams['folder']} : {deleteSelected:true,data:dc};
             var e = b.language.translate("Are you sure? Selected items will be deleted.");
             confirm(e) && (b.opts.imageManagerDeleteURL ? b.events.trigger("imageManager.beforeDeleteImage", [d]) !== !1 && ($('.fr-image-list .fr-image-container.fr-fb-selected').addClass("fr-image-deleting"),
             a.ajax({
@@ -285,6 +306,7 @@
                 headers: b.opts.requestHeaders
             }).done(function(a) {
                 b.events.trigger("imageManager.imageDeleted", [a]);
+				$('#fr-del-selected-local').hide();
 				//$(document).trigger('imageManager.unCheckAll',[$('#fr-check-all-btn')]);
                 //var c = l(parseInt(d.parent().attr("class").match(/fr-image-(\d+)/)[1], 10) + 1);
 				//m(c),
@@ -416,8 +438,12 @@
                 c.name && f.attr("alt", c.name);
 				
                 for (var j in c)
+					c.extraCls = 'fr-enabled';
+					if(typeof c.subType != 'undefined' && (c.subType == 'fb-folder' || c.subType == 'fb-image')){
+						c.extraCls = 'fr-disabled';
+					}
                     c.hasOwnProperty(j) && "thumb" != j && "url" != j && "tag" != j && f.attr("data-" + j, c[j]);
-					e.append(f).append(a(b.icon.create("imageManagerDelete")).addClass("fr-delete-img").attr("title", b.language.translate("Delete")));
+					e.append(f).append(a(b.icon.create("imageManagerDelete")).addClass("fr-delete-img").addClass(c.extraCls).attr("title", b.language.translate("Delete")));
 					if(c.type=='folder'){
 						c.subtype='folder';
 						if(typeof c.subType != 'undefined' && c.subType == 'fb-folder'){
@@ -427,7 +453,7 @@
 						
 						e.append('<span class="fr-file-name" data-name="'+c['name']+'">'+c['name']+'</span>');
 					}else{
-						c.class="fr-insert-img",c.subtype='image';
+						c.class="fr-insert-img", c.subtype='image';
 						if(typeof c.subType != 'undefined' && c.subType == 'fb-image'){
 							c.class="fr-open-folder",c.subtype=c.subType;
 						}
@@ -546,7 +572,10 @@
         function q(c) {
 			//updating url
 			if(b.opts.imageManagerFolders.length>0){
-			b.opts.imageManagerDeleteURL = b.opts.imageManagerDefaultDeleteURL+b.opts.imageManagerFolders.join('/')+'/';
+			
+			//b.opts.imageManagerDeleteURL = b.opts.imageManagerDefaultDeleteURL+b.opts.imageManagerFolders.join('/')+'/';
+			b.opts.imageManagerDeleteParams['folder'] = b.opts.userFolderDefaultPath+b.opts.imageManagerFolders.join('/')+'/';
+			
 			}
 			
             var /*Ac=c,Aa=a,*/d = a(c.currentTarget).siblings("img")
@@ -678,8 +707,8 @@
 			
 			if(newName !== null && newName.length > 0){
 				//alert('Name:'+newName);
-				b.opts.imageManagerNewFolderParams = {renameFolder:true,oldName:tg_name,newName:newName};
-				if(b.opts.imageManagerFolders.length>0){b.opts.imageManagerNewFolderURL = b.opts.imageManagerNewFolderDefaultURL+b.opts.imageManagerFolders.join('/')+'/';}renameFolder($(tg_el).closest('.fr-image-container'));
+				b.opts.imageManagerNewFolderParams = {renameFolder:true,oldName:tg_name,newName:newName,path: b.opts.userFolderDefaultPath};
+				if(b.opts.imageManagerFolders.length>0){b.opts.imageManagerNewFolderParams['path'] = b.opts.userFolderDefaultPath+b.opts.imageManagerFolders.join('/')+'/';}renameFolder($(tg_el).closest('.fr-image-container'));
 			}
 		}
 		function promptRename(name){
@@ -694,7 +723,11 @@
 			}else if(a(c.currentTarget).attr('data-subtype')=='fb-image'){
 				fbClickHandle(a(c.currentTarget).closest('.fr-image-container'));
 			}else{
-				b.opts.imageManagerFolders.push(a(c.currentTarget).attr('data-name'));b.opts.imageManagerLoadURL=b.opts.imageManagerDefaultURL+b.opts.imageManagerFolders.join('/')+'/';
+				b.opts.imageManagerFolders.push(a(c.currentTarget).attr('data-name'));
+				//b.opts.imageManagerLoadURL=b.opts.imageManagerDefaultURL+b.opts.imageManagerFolders.join('/')+'/';
+				
+				b.opts.imageManagerLoadParams['folder'] = b.opts.userFolderDefaultPath+b.opts.imageManagerFolders.join('/')+'/';
+				
 				g();
 			}
 		}
@@ -741,8 +774,9 @@
 		function newFolder(){
 			if(window.ActiveTab!='local'){return false;}
 			b.opts.imageManagerNewFolderParams.name=getName();
+			b.opts.imageManagerNewFolderParams.path = b.opts.userFolderDefaultPath;
 			if(b.opts.imageManagerFolders.length>0){
-			b.opts.imageManagerNewFolderURL = b.opts.imageManagerNewFolderDefaultURL+b.opts.imageManagerFolders.join('/')+'/';} gNewFolder();
+			b.opts.imageManagerNewFolderParams['path'] = b.opts.userFolderDefaultPath+b.opts.imageManagerFolders.join('/')+'/';} gNewFolder();
 		}
 		
 		function getName(){
@@ -758,7 +792,11 @@
 					a(c.currentTarget).css('color','#c7c3c3');
 				}else{
 					b.opts.imageManagerFolders.pop();
-					b.opts.imageManagerLoadURL = b.opts.imageManagerDefaultURL+b.opts.imageManagerFolders.join('/')+'/';
+					
+					//b.opts.imageManagerLoadURL = b.opts.imageManagerDefaultURL+b.opts.imageManagerFolders.join('/')+'/';
+					
+					b.opts.imageManagerLoadParams['folder'] = b.opts.userFolderDefaultPath+b.opts.imageManagerFolders.join('/')+'/';
+					
 					g();
 				}
 			}
@@ -820,7 +858,7 @@
 
 //Facebook SDK (Image Import)
 var self,FbObj = function (FB){
-	this.FB = FB,this.aurl='/import-from-facebook.php?folder='+window.userFolderDefaultPath,this.FB_uid='', this.FB_accessToken='',self=this,this.selectedImages=[],this.ai=[],this.al=[],this.currentFB,this.toSubmit={};
+	this.FB = FB,this.aurl='/import-from-facebook.php',this.FB_uid='', this.FB_accessToken='',self=this,this.selectedImages=[],this.ai=[],this.al=[],this.currentFB,this.toSubmit={};
 }
 
 FbObj.prototype.authRequest = function (){
@@ -947,6 +985,7 @@ FbObj.prototype.getFromPage = function(pid){
 //save pics to local storage 
 FbObj.prototype.savePics = function (){
 	console.log(JSON.stringify(this.toSubmit));
+	this.toSubmit['folder'] = window.userFolderDefaultPath
 	$.ajax({
 		url: this.aurl,
 		type:"POST",
@@ -984,7 +1023,7 @@ function FBinit(){
 /****************************************IG SDK***********************************/
 //Instagram SDK (Image Import)
 var IGself,IGObj = function (){
-	this.at,this.aju='http://'+location.hostname+'/froala_php_sdk/insta-sdk.php',IGself=this,this.ig_images,this.toSubmit={},this.aurl='/import-from-facebook.php?type=ig&folder='+window.userFolderDefaultPath;
+	this.at,this.aju='http://'+location.hostname+'/froala_php_sdk/insta-sdk.php',IGself=this,this.ig_images,this.toSubmit={},this.aurl='/import-from-facebook.php';
 }
 
 IGObj.prototype.authRequest = function (){
@@ -1016,10 +1055,23 @@ IGObj.prototype.getAccessToken = function (){
 		}
 	});
 }
+IGObj.prototype.authWindow = function(a,b){
+	IGLoginWindow = window.open(a, "", "width=650,height=500");
+	window.addEventListener("message", IGreceiveMessage, false);
+	function IGreceiveMessage(event){
+		//if (event.origin !== "http://"+location.host+'/insta-callback.php'){ alert('not matched origin'); return false;}
+		if(event.data=='success'){
+			IGself.getUserMedia();
+		}else{
+			$(document).trigger('ImageManager.OpenFacebookImages',[b]);
+		}
+	}
+}
 IGObj.prototype.getUserMedia = function (){
 	window.B.show();
 	window.C.find(".fr-list-column").empty();
-	$.get(this.aju,'user_media=true&u'+encodeURIComponent(location.href),function(response){
+	
+	$.post(this.aju,'user_media=true&usd='+encodeURIComponent(location.href),function(response){
 		//alert('user media response');
 		//console.log(response);
 		r = JSON.parse(response);
@@ -1027,7 +1079,7 @@ IGObj.prototype.getUserMedia = function (){
 			switch(r.code){
 				case 100:
 					console.log('Warning: not logged in redirecting...');
-					window.open(r.link,'_self');
+					IGself.authWindow(r.link,r.data);
 					break;
 				default:
 					console.log('Error: '+r.message);
@@ -1045,6 +1097,8 @@ IGObj.prototype.getUserMedia = function (){
 //save pics to local storage 
 IGObj.prototype.savePics = function (){
 	//console.log(JSON.stringify(this.toSubmit));
+	this.toSubmit.type = 'ig';
+	this.toSubmit.folder = window.userFolderDefaultPath;
 	$.ajax({
 		url: this.aurl,
 		type:"POST",

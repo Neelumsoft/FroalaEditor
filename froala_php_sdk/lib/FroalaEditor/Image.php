@@ -109,6 +109,7 @@ class Image {
   */
   public static function renameFolder($path,$oldName,$newName) {
 	  $response = array();
+	  $newName = str_replace(' ','-',$newName);
 	  if(is_dir($_SERVER['DOCUMENT_ROOT'].$path.$oldName) && !is_dir($_SERVER['DOCUMENT_ROOT'].$path.$newName)){
 			if(rename($_SERVER['DOCUMENT_ROOT'].$path.$oldName, $_SERVER['DOCUMENT_ROOT'].$path.$newName)){
 				$res = $newName;
@@ -117,7 +118,7 @@ class Image {
 			}
 			$response = array("status" => "success", "newName" => $res);
 		}else{
-			throw new Exception('Problem in creating New Folder or Folder Already exists');
+			$response = array("status" => "error", "message" => 'Problem in Renaming Folder or Folder Already exists');
 		}
 	  return $response;
   }

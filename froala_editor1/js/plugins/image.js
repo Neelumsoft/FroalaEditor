@@ -56,7 +56,8 @@
               , c = a.find(".fr-image-by-url-layer input");
             c.val(""),
             xa && c.val(xa.attr("src")),
-            c.trigger("change")
+            c.trigger("change"),
+			b.opts.imageUploadParams['folder'] = window.userFolderDefaultPath;
         }
         function d() {
             var a = b.$tb.find('.fr-command[data-cmd="insertImage"]')
@@ -510,7 +511,7 @@
         function H(a, c) {
 			//updating file upload path;
 			if('undefined' != typeof window.currentLocation && window.currentLocation.length > 0){
-				b.opts.imageUploadURL = b.opts.imageManagerDefaultUploadURL+window.currentLocation.join('/')+'/';
+				b.opts.imageUploadParams['folder'] = window.userFolderDefaultPath+window.currentLocation.join('/')+'/';
 			}
             if ("undefined" != typeof a && a.length > 0) {
                 if (b.events.trigger("image.beforeUpload", [a]) === !1)

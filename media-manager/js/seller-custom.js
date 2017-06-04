@@ -5,62 +5,62 @@
 
 ==============================================================*/
 
+$(document).ready(function(){
 
-
-jQuery(document).ready(function(){
-
-	var winWidht = jQuery(window).width();
-	var winHeight = jQuery(window).height();
+	var winWidht = $(window).width();
+	var winHeight = $(window).height();
 
 
 	// For leftSidebar
 
-	jQuery('.nav-side-list > li ').click(function() {		
-		jQuery('.nav-side-list > li').removeClass('expand current');
-		jQuery(this).addClass('expand');
+	$(document).on('click','.nav-side-list > li ',function() {	
+		$('.nav-side-list > li').removeClass('expand current');
+		$(this).addClass('expand');
 	});
 
-	var smenuHt = jQuery('.nav-side-list').height()-62;
-	var menuHt = jQuery('.submenu-parent').height();
+	var smenuHt = $('.nav-side-list').height()-62;
+	var menuHt = $('.submenu-parent').height();
 	
 	if(smenuHt>winHeight) {
-		jQuery('.nav-side-list').height(winHeight);
+		$('.nav-side-list').height(winHeight);
 	}
 	if(menuHt>winHeight) {
-		jQuery('.submenu-parent').height(winHeight);
+		$('.submenu-parent').height(winHeight);
 	}
 
+
+	
 
 	// 1) For Advance setting option of Catelog page
 
-	 jQuery('.close-variant').click(function(){
-	 	jQuery(this).parent('.variant-option').hide();
+	 $(document).on('click','.close-variant',function(){
+	 	$(this).parent('.variant-option').hide();
 	 });
 
-	jQuery('#choose-variant').on('change', function() {
+	$(document).on('change','#choose-variant', function() {
 		var variant_value = this.value;
 
 		if(variant_value == 'color' || variant_value == 'size') {
-			jQuery('.variant-size-container').addClass('show');
+			$('.variant-size-container').addClass('show');
 		}
 		else{
-			jQuery('.variant-size-container').removeClass('show');
+			$('.variant-size-container').removeClass('show');
 		}
 
 	});
 
 		// Add another row
 
-	jQuery('.add-another-variant').click(function(){
-		 jQuery('.variant-option').clone().insertAfter(".variant-option");
+	$(document).on('click','.add-another-variant',function(){
+		 $('.variant-option').clone().insertAfter(".variant-option");
 	});
 
-	jQuery('.add-variant-size-btn').click(function(){
-		jQuery('.add-variant-row').show(100);
+	$(document).on('click','.add-variant-size-btn',function(){
+		$('.add-variant-row').show(100);
 	});
 
-	jQuery('.close-another-variant').click(function(){
-	 	jQuery('.add-variant-row').hide();
+	$(document).on('click','.close-another-variant',function(){
+	 	$('.add-variant-row').hide();
 	});
 		
 
@@ -68,74 +68,75 @@ jQuery(document).ready(function(){
 
 	/* landingpage-infohide */
 
-	jQuery('.land-pageinfo input').click(function(){
-		if(jQuery('#landingpage-infohide').is(':checked')){
-			jQuery('.landing-info-tab').hide(100);
+	$(document).on('click','.land-pageinfo input',function(){
+		if($('#landingpage-infohide').is(':checked')){
+			$('.landing-info-tab').hide(100);
 		}
 		else{
-			jQuery('.landing-info-tab').show(100);
+			$('.landing-info-tab').show(100);
 		}
 	});
 
 	/* close box in user page  */
 
-	jQuery('.tuser-box .close').click(function(){
-		jQuery(this).parents('.tuser-box').hide(100);
+	$(document).on('click','.tuser-box .close',function(){
+		$(this).parents('.tuser-box').hide(100);
 	});
 
 	/* show check uncheck in payment method page */
 
-	jQuery('.onoffswitch input[type="checkbox"]').click(function(){
-		jQuery(this).parents('.payment-header').toggleClass('active');
-    if(jQuery(this).is(":checked")){
-      jQuery(this).parents('.payment-header').siblings('.payment-field').show(500);
+	$(document).on('click','.onoffswitch input[type="checkbox"]',function(){
+		$(this).parents('.payment-header').toggleClass('active');
+    if($(this).is(":checked")){
+      $(this).parents('.payment-header').siblings('.payment-field').show(500);
     }
-    else if(jQuery(this).is(":not(:checked)")){
-      jQuery(this).parents('.payment-header').siblings('.payment-field').hide(500);
+    else if($(this).is(":not(:checked)")){
+      $(this).parents('.payment-header').siblings('.payment-field').hide(500);
     }
   });
 
 
 	/*  Add class in media page */
 
-	jQuery('.bulk-select').click(function(){
-		jQuery('.check-wrapper').toggleClass('show');
+	$(document).on('click','.bulk-select',function(){
+		$('.check-wrapper').toggleClass('show');
 	});
 
-	jQuery('.view-list-icon .list-view').click(function(){
-		jQuery('.media-list-item').addClass('list-view');
+	$(document).on('click','.view-list-icon .list-view',function(){
+		$('.media-list-item').addClass('list-view');
 	});
-	jQuery('.view-list-icon .grid-view').click(function(){
-		jQuery('.media-list-item').removeClass('list-view');
+	$(document).on('click','.view-list-icon .grid-view',function(){
+		$('.media-list-item').removeClass('list-view');
 	});
 
 	// For Tree menu
 
-	jQuery(function () {
-    jQuery('.tree li:has(ul)').addClass('parent_li').find(' > a .menuIcon').attr('title', 'Collapse');
-    jQuery('.tree li.parent_li > a .menuIcon').on('click', function (e) {
+	$(document).on('click','.tree li.parent_li > a .menuIcon',function (e) {
     		e.preventDefault();
-        var children = jQuery(this).parent().parent('li.parent_li').find(' > ul > li');
+        var children = $(this).parent().parent('li.parent_li').find(' > ul > li');
         if (children.is(":visible")) {
             children.hide('fast');
-            jQuery(this).attr('title', 'Expand').addClass('glyphicon-plus').removeClass('glyphicon-minus');
+            $(this).attr('title', 'Expand').addClass('glyphicon-plus').removeClass('glyphicon-minus');
         } else {
             children.show('fast');
-            jQuery(this).attr('title', 'Collapse').addClass('glyphicon-minus').removeClass('glyphicon-plus');
+            $(this).attr('title', 'Collapse').addClass('glyphicon-minus').removeClass('glyphicon-plus');
         }
         e.stopPropagation();
     });
-	});
+	
+	//setting left tree
+	
+	$('.tree li:has(ul)').addClass('parent_li').find(' > a .menuIcon').attr('title', 'Collapse');
 
 	// Hide history
 	
-	jQuery('.hideHistory').click(function(){
-		jQuery('.history-list').slideToggle();
-		if(jQuery(this).text() == 'Hide History'){
-		  jQuery(this).text('Show History');
+	$(document).on('click','.hideHistory',function(){
+		$('.history-list').slideToggle();
+		if($(this).text() == 'Hide History'){
+		  $(this).text('Show History');
 		} 
 		else {
-		  jQuery(this).text('Hide History');
+		  $(this).text('Hide History');
 		}		
 	});
 

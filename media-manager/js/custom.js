@@ -266,7 +266,7 @@ jQuery(document).ready(function(){
 
 	// For language select box
 
-	 jQuery(".select-lang select").msDropdown({roundedBorder:false});
+	 //jQuery(".select-lang select").msDropdown({roundedBorder:false});
 
 	//
 

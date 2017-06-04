@@ -1,21 +1,21 @@
 <?php
 session_start();
-if(isset($_GET['u']) && !empty($_GET['u'])){
-	$_SESSION['callback_u'] = $_GET['u'];
+if(isset($_GET['usd']) && !empty($_GET['usd'])){
+	$_SESSION['callback_u'] = $_GET['usd'];
 }
 
 require('ig-php-sdk/ig-php-sdk.php');
 $ig = new IG();
 
-if(isset($_GET['clogin'])){
+if(isset($_POST['clogin'])){
 	$ig->checkLogin();
 }
 
-if(isset($_GET['access_token'])){
+if(isset($_POST['access_token'])){
 	$ig->getAccessToken();
 }
 
-if(isset($_GET['user_media'])){
+if(isset($_POST['user_media'])){
 	$ig->getUserMedia();
 }
 
